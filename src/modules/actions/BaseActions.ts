@@ -14,7 +14,7 @@ export default class BaseActions {
   mainStore: BaseStore<BaseModel, BaseModel>;
   api: BaseApi<BaseApiModel>;
 
-  constructor(mainStore, api) {
+  constructor(mainStore: BaseStore<BaseModel, BaseModel>, api) {
     this.mainStore = mainStore;
     this.api = api;
   }
