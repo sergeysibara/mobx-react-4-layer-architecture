@@ -1,14 +1,14 @@
 import todosServerEmulator from "server/todosServerEmulator";
 import {
-  BaseApiModel,
   ResponseList,
   ResponseModel,
   DeleteResponse
 } from "./types";
+import Identifiable from "modules/types/Identifiable";
 
 export type Response =
-  | ResponseList<BaseApiModel>
-  | ResponseModel<BaseApiModel>
+  | ResponseList<Identifiable>
+  | ResponseModel<Identifiable>
   | DeleteResponse;
 
 const callApiMethod = async (
@@ -28,21 +28,21 @@ const apiService = {
   get: (
     url: string,
     params?: object
-  ): Promise<ResponseList<BaseApiModel> | ResponseModel<BaseApiModel>> =>
+  ): Promise<ResponseList<Identifiable> | ResponseModel<Identifiable>> =>
     callApiMethod("get", url, undefined, params) as Promise<
-      ResponseList<BaseApiModel> | ResponseModel<BaseApiModel>
+      ResponseList<Identifiable> | ResponseModel<Identifiable>
     >,
 
-  post: (url, data: object): Promise<ResponseModel<BaseApiModel>> =>
-    callApiMethod("post", url, data) as Promise<ResponseModel<BaseApiModel>>,
+  post: (url, data: object): Promise<ResponseModel<Identifiable>> =>
+    callApiMethod("post", url, data) as Promise<ResponseModel<Identifiable>>,
 
   patch: (
     url: string,
     data: object,
     params?: object
-  ): Promise<ResponseModel<BaseApiModel>> =>
+  ): Promise<ResponseModel<Identifiable>> =>
     callApiMethod("patch", url, data, params) as Promise<
-      ResponseModel<BaseApiModel>
+      ResponseModel<Identifiable>
     >,
 
   delete: (url: string, params?: object): Promise<DeleteResponse> =>

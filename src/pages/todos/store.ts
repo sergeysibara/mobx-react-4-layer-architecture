@@ -1,9 +1,9 @@
 import BaseStore from "modules/store/BaseStore";
-import { BaseModel } from "modules/store/types";
+import Identifiable from "modules/types/Identifiable";
 import { FilterVisibility } from "./consts";
 import { computed } from "mobx";
 
-export interface TodoModel extends BaseModel {
+export interface TodoModel extends Identifiable {
   text: string;
   completed: boolean;
 }

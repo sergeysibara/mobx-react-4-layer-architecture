@@ -1,7 +1,6 @@
 import BaseStore from "modules/store/BaseStore";
-import { BaseModel } from "modules/store/types";
+import Identifiable from "modules/types/Identifiable";
 import BaseApi from "modules/api/BaseApi";
-import { BaseApiModel } from "modules/api/types";
 
 /**
  * Base class for action group.
@@ -11,10 +10,10 @@ import { BaseApiModel } from "modules/api/types";
  * can to use custom actions class.
  */
 export default class BaseActions {
-  mainStore: BaseStore<BaseModel, BaseModel>;
-  api: BaseApi<BaseApiModel>;
+  mainStore: BaseStore<Identifiable, Identifiable>;
+  api: BaseApi<Identifiable>;
 
-  constructor(mainStore: BaseStore<BaseModel, BaseModel>, api) {
+  constructor(mainStore: BaseStore<Identifiable, Identifiable>, api) {
     this.mainStore = mainStore;
     this.api = api;
   }
@@ -43,7 +42,7 @@ export default class BaseActions {
     }
   };
 
-  update = async (model: BaseModel) => {
+  update = async (model: Identifiable) => {
     const editModule = await this.api.update(model);
     if (editModule.model) {
       await this.getList(); // for apply filters

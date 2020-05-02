@@ -1,12 +1,12 @@
 import apiService from "./apiService";
 import {
-  BaseApiModel,
   ResponseList,
   ResponseModel,
   DeleteResponse
 } from "./types";
+import Identifiable from "modules/types/Identifiable";
 
-export default class BaseApi<T extends BaseApiModel> {
+export default class BaseApi<T extends Identifiable> {
   apiUrl: string;
 
   constructor(apiUrl: string) {

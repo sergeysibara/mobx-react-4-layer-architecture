@@ -1,5 +1,6 @@
 import { observable, action } from "mobx";
-import { BaseModel, EditModule, FiltersType, ListModule, SearchParams } from "./types";
+import { EditModule, FiltersType, ListModule, SearchParams } from "./types";
+import Identifiable from "modules/types/Identifiable";
 
 /**
  * Base class for stores.
@@ -11,7 +12,7 @@ import { BaseModel, EditModule, FiltersType, ListModule, SearchParams } from "./
  * instead modules in common state (list, searchParams, edit) can use multiple small stores:
  *   BaseListStore, SearchParamsStore, BaseEditModelStore, BaseSelectedItemStore
  */
-export default class BaseStore<TListItem extends BaseModel, TeditModel extends BaseModel> {
+export default class BaseStore<TListItem extends Identifiable, TeditModel extends Identifiable> {
   @observable state: {
     list: ListModule<TListItem>;
     searchParams: SearchParams;

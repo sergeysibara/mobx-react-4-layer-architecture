@@ -1,7 +1,3 @@
-export interface BaseModel {
-  id: number;
-}
-
 export type ErrorType = string | object;
 export type FiltersType = Record<string, string | number | boolean>;
 
