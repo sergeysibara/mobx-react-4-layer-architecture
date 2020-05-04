@@ -2,10 +2,9 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import * as TodoStore from "../store";
 import { observer } from "mobx-react-lite";
-import * as Actions from "../actions";
 import { FilterVisibility } from "../consts";
 
-const actions = Actions.getInstance();
+const todoStore = TodoStore.getInstance();
 
 type MouseEventHandlerType = (e: React.MouseEvent, additionalParam: string) => void;
 
@@ -21,7 +20,7 @@ const FilterButton = observer<{
         style={{ marginLeft: "1rem" }}
         disabled={visibilityFilter === filterValue}
         onClick={e => {
-          actions.setFilters({ visibility: filterValue });
+          todoStore.setFilters({ visibility: filterValue });
           onClick(e, filterValue);
           if (onClick) {
             onClick(e, filterValue);
@@ -35,17 +34,17 @@ const FilterButton = observer<{
   }
 );
 
-const Filters = ({ onChange }: {onChange: MouseEventHandlerType}) => {
+const Filters = () => {
   return (
     <div>
       <span>Show: </span>
-      <FilterButton filterValue={FilterVisibility.All} onClick={onChange}>
+      <FilterButton filterValue={FilterVisibility.All} onClick={todoStore.getListAction}>
         All
       </FilterButton>
-      <FilterButton filterValue={FilterVisibility.Active} onClick={onChange}>
+      <FilterButton filterValue={FilterVisibility.Active} onClick={todoStore.getListAction}>
         Active
       </FilterButton>
-      <FilterButton filterValue={FilterVisibility.Completed} onClick={onChange}>
+      <FilterButton filterValue={FilterVisibility.Completed} onClick={todoStore.getListAction}>
         Completed
       </FilterButton>
     </div>

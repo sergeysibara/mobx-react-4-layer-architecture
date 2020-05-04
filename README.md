@@ -2,6 +2,21 @@
  
 ![](content/schemes.png)
 
+## Todo
+* To use static getInstance in classes and to use getter for clasaes that used it,   
+ for example:   
+```javascript
+get store() {
+  return StoreClass.getInstance();
+}
+updateAction() {
+  store.update();
+}
+```
+* To use arrow functions in store and actions
+* Update scheme. (Actions can to use any stores;    
+stores can not to use other stores (but can to use actions for update other stores) )
+
 ___
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

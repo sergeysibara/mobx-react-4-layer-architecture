@@ -2,11 +2,10 @@ import React, { useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import useInputBind from "components/controls/useInputBind";
 import { observer } from "mobx-react-lite";
-import * as Actions from "../actions";
 import * as TodoStore from "../store";
 import { TodoModel } from "../store";
 
-const actions = Actions.getInstance();
+const todoStore = TodoStore.getInstance();
 
 const TodoForm = observer(() => {
   const todoModel = TodoStore.getInstance().editModel;
@@ -27,10 +26,10 @@ const TodoForm = observer(() => {
 
     if (trimmedText.length > 0) {
       if (todoModel) {
-        actions.update({ ...todoModel, text: trimmedText } as TodoModel);
-        actions.clearEditModule();
+        todoStore.updateAction({ ...todoModel, text: trimmedText } as TodoModel);
+        todoStore.clearEditModule();
       } else {
-        actions.create({ text: trimmedText });
+        todoStore.createAction({ text: trimmedText });
       }
     }
   };

@@ -1,6 +1,7 @@
 import BaseStore from "modules/store/BaseStore";
 import Identifiable from "modules/types/Identifiable";
 import BaseApi from "modules/api/BaseApi";
+import { ListModule } from "../store/types";
 
 /**
  * Base class for action group.
@@ -10,66 +11,38 @@ import BaseApi from "modules/api/BaseApi";
  * can to use custom actions class.
  */
 export default class BaseActions {
-  protected _mainStore: BaseStore<Identifiable, Identifiable>;
   protected _api: BaseApi<Identifiable>;
-
-  get mainStore(): BaseStore<Identifiable, Identifiable> {
-      return this._mainStore;
-  }
 
   get api(): BaseApi<Identifiable> {
     return this._api;
   }
 
-  constructor(mainStore: BaseStore<Identifiable, Identifiable>, api) {
-    this._mainStore = mainStore;
+  constructor(api) {
     this._api = api;
   }
 
-  getOne = async (id: number) => {
-    this._mainStore.clearEditModule();
+  getOne = async (id: number): Promise<Identifiable | undefined> => {
     const response = await this._api.getOne(id);
-    if (response.model) this._mainStore.setEditModule({ model: response.model });
+    return response.model;
   };
 
-  getList = async () => {
-    const searchParams = this._mainStore.searchParams;
-    const response = await this._api.getList(searchParams);
-    if (response.results)
-      this._mainStore.setListModule({
-        results: response.results,
-        count: response.count
-      });
+  getList = async (searchParams: object): Promise<ListModule<Identifiable>> => {
+    return await this._api.getList(searchParams) as ListModule<Identifiable>;
   };
 
-  create = async (modelData: object) => {
+  create = async (modelData: object): Promise<Identifiable | undefined> =>  {
     const response = await this._api.create(modelData);
-    if (response.model) {
-      await this.getList(); // for apply filters
-      // this._mainStore.addToList(response.model);
-    }
+    return response.model;
   };
 
-  update = async (model: Identifiable) => {
-    const editModule = await this._api.update(model);
-    if (editModule.model) {
-      await this.getList(); // for apply filters
-      //this._mainStore.updateListItem(editModule.model);
-    }
+  update = async (model: Identifiable): Promise<Identifiable | undefined> => {
+    const response = await this._api.update(model);
+    return response.model;
   };
 
-  clearEditModule = () => {
-    this._mainStore.clearEditModule();
-  };
-
-  delete = async (id: number) => {
+  delete = async (id: number): Promise<boolean> => {
     const response = await this._api.delete(id);
-    if (!response.isError) {
-      this._mainStore.deleteFromList(id);
-    }
+    return response.isError === true;
   };
 
-  setFilters = filterParams => {
-    this._mainStore.setFilters(filterParams);
-  };
 }

@@ -9,17 +9,16 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import { observer } from "mobx-react-lite";
 import * as TodoStore from "../store";
-import * as Actions from "../actions";
 import { TodoModel } from "../store";
 
-const actions = Actions.getInstance();
+const todoStore = TodoStore.getInstance();
 
 // for update view without server
 // import useStoreClone from 'modules/store/useStoreClone';
 // const [todos, setLocalStoreState] = useStoreClone(todoStore.results);
 //
 // const handleChange = (item, index) => {
-//   actions.update({ id: item.id, completed: !item.completed });
+//   todoStore.updateAction({ id: item.id, completed: !item.completed });
 //
 //   // for update without waiting api call
 //   todos[index].completed = !item.completed;
@@ -28,7 +27,7 @@ const actions = Actions.getInstance();
 
 const TodoList = observer(() => {
   const handleChange = (item) => {
-    actions.update({ id: item.id, completed: !item.completed } as TodoModel);
+    todoStore.updateAction({ id: item.id, completed: !item.completed } as TodoModel);
   };
 
   return (
@@ -52,7 +51,7 @@ const TodoList = observer(() => {
               aria-label="Edit"
               onClick={e => {
                 e.stopPropagation();
-                actions.getOne(item.id);
+                todoStore.getOneAction(item.id);
               }}
             >
               <EditIcon />
@@ -61,7 +60,7 @@ const TodoList = observer(() => {
               aria-label="Delete"
               onClick={e => {
                 e.stopPropagation();
-                actions.delete(item.id);
+                todoStore.deleteAction(item.id);
               }}
             >
               <DeleteIcon />
