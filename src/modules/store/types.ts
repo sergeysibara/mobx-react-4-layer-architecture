@@ -1,13 +1,15 @@
-export type ErrorType = string | object;
-export type FiltersType = Record<string, string | number | boolean>;
+import Identifiable from "../types/Identifiable";
 
-export interface ListModule<TListItem> {
+export type ErrorType = string | object;
+
+export interface ListModule<TListItem extends Identifiable> {
   results: TListItem[];
   count?: number; // number of all items on server
   isLoading?: boolean;
   error?: ErrorType;
 }
 
+export type FiltersType = Record<string, string | number | boolean>;
 export interface SearchParams {
   filters: FiltersType;
   sorting?: string;
@@ -18,8 +20,8 @@ export interface SearchParams {
   };
 }
 
-export interface EditModule<TeditModel> {
-  model?: TeditModel;
+export interface EditModule<TEditModel extends Identifiable> {
+  model?: TEditModel;
   isLoading?: boolean;
   error?: ErrorType;
 }

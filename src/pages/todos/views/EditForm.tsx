@@ -10,6 +10,7 @@ const actions = Actions.getInstance();
 
 const TodoForm = observer(() => {
   const todoModel = TodoStore.getInstance().editModel;
+  const isNew = !todoModel;
 
   const [todoText, setTodoText, todoTextBind] = useInputBind(
     todoModel ? todoModel.text : ""
@@ -44,7 +45,8 @@ const TodoForm = observer(() => {
     <form onSubmit={handleSubmit}>
       <TextField
         variant="outlined"
-        placeholder="Add todo"
+        placeholder={`${isNew ? "add" : "edit"} todo`}
+        label={`Press Enter for ${isNew ? "add" : "edit"} todo`}
         margin="normal"
         {...todoTextBind}
       />

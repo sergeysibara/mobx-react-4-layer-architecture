@@ -7,38 +7,42 @@ import {
 import Identifiable from "modules/types/Identifiable";
 
 export default class BaseApi<T extends Identifiable> {
-  apiUrl: string;
+  protected _apiUrl: string;
+
+  get apiUrl(): string {
+    return this._apiUrl;
+  }
 
   constructor(apiUrl: string) {
-    this.apiUrl = apiUrl;
+    this._apiUrl = apiUrl;
   }
 
   getOne = async (id: number): Promise<ResponseModel<T>> => {
-    return (await apiService.get(`${this.apiUrl}/${id}`)) as Promise<
+    return (await apiService.get(`${this._apiUrl}/${id}`)) as Promise<
       ResponseModel<T>
     >;
   };
 
   getList = async (params: object): Promise<ResponseList<T>> => {
-    return (await apiService.get(this.apiUrl, params)) as Promise<
+    return (await apiService.get(this._apiUrl, params)) as Promise<
       ResponseList<T>
     >;
   };
 
   create = async (modelData: object): Promise<ResponseModel<T>> => {
-    return (await apiService.post(this.apiUrl, modelData)) as Promise<
+    return (await apiService.post(this._apiUrl, modelData)) as Promise<
       ResponseModel<T>
     >;
   };
 
   update = async (modelData: { id: number }): Promise<ResponseModel<T>> => {
     return (await apiService.patch(
-      `${this.apiUrl}/${modelData.id}`,
+      `${this._apiUrl}/${modelData.id}`,
       modelData
     )) as Promise<ResponseModel<T>>;
   };
 
   delete = async (id: number): Promise<DeleteResponse> => {
-    return await apiService.delete(`${this.apiUrl}/${id}`);
+    return await apiService.delete(`${this._apiUrl}/${id}`);
   };
 }

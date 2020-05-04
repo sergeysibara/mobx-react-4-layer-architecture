@@ -10,13 +10,13 @@ import Identifiable from "modules/types/Identifiable";
  *
  * Note:
  * instead modules in common state (list, searchParams, edit) can use multiple small stores:
- *   BaseListStore, SearchParamsStore, BaseEditModelStore, BaseSelectedItemStore
+ *   BaseListStore, BaseEditModelStore
  */
-export default class BaseStore<TListItem extends Identifiable, TeditModel extends Identifiable> {
-  @observable state: {
+export default class BaseStore<TListItem extends Identifiable, TEditModel extends Identifiable> {
+   @observable protected _state: {
     list: ListModule<TListItem>;
     searchParams: SearchParams;
-    edit: EditModule<TeditModel>;
+    edit: EditModule<TEditModel>;
   } = {
     list: {
       results: []
@@ -29,15 +29,15 @@ export default class BaseStore<TListItem extends Identifiable, TeditModel extend
   };
 
   get list(): TListItem[] {
-    return this.state.list.results;
+    return this._state.list.results;
   }
 
-  get editModel(): TeditModel | undefined {
-    return this.state.edit.model;
+  get editModel(): TEditModel | undefined {
+    return this._state.edit.model;
   }
 
   get searchParams(): SearchParams {
-    return this.state.searchParams;
+    return this._state.searchParams;
   }
 
   get filters(): FiltersType | undefined {
@@ -45,19 +45,19 @@ export default class BaseStore<TListItem extends Identifiable, TeditModel extend
   }
 
   @action setListModule(list: ListModule<TListItem>) {
-    this.state.list = list;
+    this._state.list = list;
   }
 
   @action addToList(item: TListItem) {
     this.list.push(item);
   }
 
-  @action setEditModule(editModule: EditModule<TeditModel>) {
-    this.state.edit = editModule;
+  @action setEditModule(editModule: EditModule<TEditModel>) {
+    this._state.edit = editModule;
   }
 
   @action clearEditModule() {
-    this.state.edit = {};
+    this._state.edit = {};
   }
 
   @action updateListItem(item: TListItem) {
@@ -73,6 +73,6 @@ export default class BaseStore<TListItem extends Identifiable, TeditModel extend
   }
 
   @action setFilters(filters: FiltersType) {
-    this.state.searchParams.filters = filters;
+    this.searchParams.filters = filters;
   }
 }
