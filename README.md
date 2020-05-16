@@ -3,17 +3,33 @@
 ![](content/schemes.png)
 
 ## Todo
-* Instead injecting through constructor do inject all initialization data for stores, actions, apiUrls in single shared file.
-* To use static getInstance in classes and to use getter for classes that used it,   
- for example:   
+* Instead injecting through constructor do inject all initialization data for stores, actions, apiUrls in single shared file.   
+ For example:   
+ ```javascript
+injectAll(api, actions, store) {
+  actions.inject(api, store)
+  store.inject(actions)
+}
+
+injectAll(todoApi, todoActions, todoStore);
+injectAll(userApi, userActions, userStore);
+```
+* (optional) Not use classes for actions and api. Can use bind and create bindAll function.  
+For example:
+```javascript
+todoCreate = baseCreate.bind(todoApi, todoStore);
+```
+
+* To use static getInstance in classes and to use getter for classes that used it.     
+ For example:   
 ```javascript
 get store() {
   return StoreClass.getInstance();
 }
+
 updateAction() {
   store.update();
 }
-and (optional) not use classes for actions and api
 ```
 * To use arrow functions in store and actions
 * Update scheme. (Actions can to use any stores;    
