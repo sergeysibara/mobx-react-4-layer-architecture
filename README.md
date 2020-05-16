@@ -3,7 +3,8 @@
 ![](content/schemes.png)
 
 ## Todo
-* To use static getInstance in classes and to use getter for clasaes that used it,   
+* Instead injecting through constructor do inject all initialization data for stores, actions, apiUrls in single shared file.
+* To use static getInstance in classes and to use getter for classes that used it,   
  for example:   
 ```javascript
 get store() {
@@ -12,6 +13,7 @@ get store() {
 updateAction() {
   store.update();
 }
+and (optional) not use classes for actions and api
 ```
 * To use arrow functions in store and actions
 * Update scheme. (Actions can to use any stores;    
