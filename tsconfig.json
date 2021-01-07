@@ -17,10 +17,11 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noEmit": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "isolatedModules": true,
     "noImplicitAny": false,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "noFallthroughCasesInSwitch": true
   },
   "include": [
     "src"

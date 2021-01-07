@@ -1,6 +1,7 @@
 import Identifiable from "../types/Identifiable";
+import ObjectType from "../types/ObjectType";
 
-export type ErrorType = string | object;
+export type ErrorType = string | ObjectType;
 
 export interface ListModule<TListItem extends Identifiable> {
   results: TListItem[];
@@ -9,7 +10,7 @@ export interface ListModule<TListItem extends Identifiable> {
   error?: ErrorType;
 }
 
-export type FiltersType = Record<string, string | number | boolean>;
+export type FiltersType = Record<string, unknown>;
 export interface SearchParams {
   filters: FiltersType;
   sorting?: string;

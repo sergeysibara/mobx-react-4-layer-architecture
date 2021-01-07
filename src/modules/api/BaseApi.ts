@@ -5,6 +5,7 @@ import {
   DeleteResponse
 } from "./types";
 import Identifiable from "modules/types/Identifiable";
+import ObjectType from "modules/types/ObjectType";
 
 export default class BaseApi<T extends Identifiable> {
   protected _apiUrl: string;
@@ -23,13 +24,13 @@ export default class BaseApi<T extends Identifiable> {
     >;
   };
 
-  getList = async (params: object): Promise<ResponseList<T>> => {
+  getList = async (params: ObjectType): Promise<ResponseList<T>> => {
     return (await apiService.get(this._apiUrl, params)) as Promise<
       ResponseList<T>
     >;
   };
 
-  create = async (modelData: object): Promise<ResponseModel<T>> => {
+  create = async (modelData: ObjectType): Promise<ResponseModel<T>> => {
     return (await apiService.post(this._apiUrl, modelData)) as Promise<
       ResponseModel<T>
     >;

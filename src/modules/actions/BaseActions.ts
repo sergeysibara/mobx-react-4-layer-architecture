@@ -1,5 +1,6 @@
 import BaseStore from "modules/store/BaseStore";
 import Identifiable from "modules/types/Identifiable";
+import ObjectType from "modules/types/ObjectType";
 import BaseApi from "modules/api/BaseApi";
 
 /**
@@ -42,7 +43,7 @@ export default class BaseActions {
       });
   };
 
-  create = async (modelData: object) => {
+  create = async (modelData: ObjectType) => {
     const response = await this._api.create(modelData);
     if (response.model) {
       await this.getList(); // for apply filters

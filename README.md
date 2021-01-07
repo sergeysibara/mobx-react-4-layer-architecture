@@ -1,3 +1,10 @@
+todo:
+* add real 3rd party server
+* remove mobx-react (it for class components only) and add mobx-react-lite (for functional components only) 
+ * remove style in js
+* remove any
+
+
 ## Description
  
 ![](content/schemes.png)

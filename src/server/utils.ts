@@ -2,7 +2,7 @@ const serverUtils = {
   sleep: ms =>
     new Promise(resolve => {
       setTimeout(() => {
-        resolve();
+        resolve(null);
       }, ms);
     }),
 
