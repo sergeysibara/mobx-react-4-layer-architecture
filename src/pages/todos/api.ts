@@ -1,9 +1,9 @@
 import BaseApi from "modules/api/BaseApi";
-import Identifiable from "modules/types/Identifiable";
+import IIdentifiable from "modules/types/IIdentifiable";
 
 // class TodoApi extend BaseApi // for extend and overriding
 
-export interface TodoApiModel extends Identifiable {
+export interface TodoApiModel extends IIdentifiable {
   text: string;
   completed: boolean;
 }

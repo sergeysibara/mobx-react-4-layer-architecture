@@ -1,3 +1,2 @@
-// eslint-disable-next-line @typescript-eslint/ban-types
-type ObjectType = object;//// Record<string, unknown> | any; // todo remove any and fix error for promise
+type ObjectType =  Record<string, unknown> | null | undefined;
 export default ObjectType;

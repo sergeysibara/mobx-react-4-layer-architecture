@@ -1,6 +1,7 @@
 import { observable, action, makeObservable } from "mobx";
-import { EditModule, FiltersType, ListModule, SearchParams } from "./types";
-import Identifiable from "modules/types/Identifiable";
+import { IEditState, IListState, ISearchParamsState } from "./types";
+import IIdentifiable from "modules/types/IIdentifiable";
+import ObjectType from "../types/ObjectType";
 
 /**
  * Base class for stores.
@@ -13,20 +14,20 @@ import Identifiable from "modules/types/Identifiable";
  *   BaseListStore, SearchParamsStore, BaseEditStore.
  * * You can use constructor function factory function or objects instead classes.
  */
-export default class BaseStore<TListItem extends Identifiable, TEditModel extends Identifiable> {
+export default class BaseStore<TListItem extends IIdentifiable, TEditModel extends IIdentifiable> {
   @observable
-  protected listState: ListModule<TListItem> = {
+  protected listState: IListState<TListItem> = {
     results: []
   };
 
   @observable
-  protected searchParamsState: SearchParams = {
+  protected searchParamsState: ISearchParamsState = {
     filters: {},
     paging: {},
   };
 
   @observable
-  protected editState: EditModule<TEditModel> = {
+  protected editState: IEditState<TEditModel> = {
   };
 
   constructor() {
@@ -41,15 +42,15 @@ export default class BaseStore<TListItem extends Identifiable, TEditModel extend
     return this.editState.model;
   }
 
-  get searchParams(): SearchParams {
+  get searchParams(): ISearchParamsState {
     return this.searchParamsState;
   }
 
-  get filters(): FiltersType | undefined {
-    return this.searchParams ? this.searchParams.filters : undefined;
+  get filters(): ObjectType {
+    return this.searchParams?.filters;
   }
 
-  @action setListModule(list: ListModule<TListItem>) {
+  @action setListModule(list: IListState<TListItem>) {
     this.listState = list;
   }
 
@@ -57,7 +58,7 @@ export default class BaseStore<TListItem extends Identifiable, TEditModel extend
     this.list.push(item);
   }
 
-  @action setEditModule(editModule: EditModule<TEditModel>) {
+  @action setEditModule(editModule: IEditState<TEditModel>) {
     this.editState = editModule;
   }
 
@@ -77,7 +78,7 @@ export default class BaseStore<TListItem extends Identifiable, TEditModel extend
     }
   }
 
-  @action setFilters(filters: FiltersType) {
+  @action setFilters(filters: ObjectType) {
     this.searchParams.filters = filters;
   }
 }

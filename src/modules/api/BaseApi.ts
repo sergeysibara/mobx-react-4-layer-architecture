@@ -4,10 +4,10 @@ import {
   ResponseModel,
   DeleteResponse
 } from "./types";
-import Identifiable from "modules/types/Identifiable";
+import IIdentifiable from "modules/types/IIdentifiable";
 import ObjectType from "modules/types/ObjectType";
 
-export default class BaseApi<T extends Identifiable> {
+export default class BaseApi<T extends IIdentifiable> {
   protected _apiUrl: string;
 
   get apiUrl(): string {

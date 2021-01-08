@@ -1,11 +1,11 @@
-import Identifiable from "modules/types/Identifiable";
+import IIdentifiable from "modules/types/IIdentifiable";
 
-export interface ResponseModel<T extends Identifiable> {
+export interface ResponseModel<T extends IIdentifiable> {
   model?: T;
   isError?: boolean;
 }
 
-export interface ResponseList<T extends Identifiable> {
+export interface ResponseList<T extends IIdentifiable> {
   results?: T[];
   count?: number;
   isError?: boolean;

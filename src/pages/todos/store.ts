@@ -1,16 +1,16 @@
 import BaseStore from "modules/store/BaseStore";
-import Identifiable from "modules/types/Identifiable";
+import IIdentifiable from "modules/types/IIdentifiable";
 import { FilterVisibility } from "./consts";
 import { computed } from "mobx";
 
-export interface TodoModel extends Identifiable {
+export interface TodoModel extends IIdentifiable {
   text: string;
   completed: boolean;
 }
 
 export class TodoStore extends BaseStore<TodoModel, TodoModel> {
   @computed get visibilityFilter(): string {
-    return this.filters && this.filters.visibility
+    return this.filters && (this.filters.visibility)
       ? (this.filters.visibility as string)
       : FilterVisibility.All;
   }

@@ -1,18 +1,17 @@
-import Identifiable from "../types/Identifiable";
+import IIdentifiable from "../types/IIdentifiable";
 import ObjectType from "../types/ObjectType";
 
 export type ErrorType = string | ObjectType;
 
-export interface ListModule<TListItem extends Identifiable> {
+export interface IListState<TListItem extends IIdentifiable> {
   results: TListItem[];
   count?: number; // number of all items on server
   isLoading?: boolean;
   error?: ErrorType;
 }
 
-export type FiltersType = Record<string, unknown>;
-export interface SearchParams {
-  filters: FiltersType;
+export interface ISearchParamsState {
+  filters: ObjectType;
   sorting?: string;
   paging: {
     offset?: number;
@@ -21,7 +20,7 @@ export interface SearchParams {
   };
 }
 
-export interface EditModule<TEditModel extends Identifiable> {
+export interface IEditState<TEditModel extends IIdentifiable> {
   model?: TEditModel;
   isLoading?: boolean;
   error?: ErrorType;

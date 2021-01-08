@@ -4,12 +4,12 @@ import {
   ResponseModel,
   DeleteResponse
 } from "./types";
-import Identifiable from "modules/types/Identifiable";
+import IIdentifiable from "modules/types/IIdentifiable";
 import ObjectType from "modules/types/ObjectType";
 
 export type Response =
-  | ResponseList<Identifiable>
-  | ResponseModel<Identifiable>
+  | ResponseList<IIdentifiable>
+  | ResponseModel<IIdentifiable>
   | DeleteResponse;
 
 const callApiMethod = async (
@@ -29,21 +29,21 @@ const apiService = {
   get: (
     url: string,
     params?: ObjectType
-  ): Promise<ResponseList<Identifiable> | ResponseModel<Identifiable>> =>
+  ): Promise<ResponseList<IIdentifiable> | ResponseModel<IIdentifiable>> =>
     callApiMethod("get", url, undefined, params) as Promise<
-      ResponseList<Identifiable> | ResponseModel<Identifiable>
+      ResponseList<IIdentifiable> | ResponseModel<IIdentifiable>
     >,
 
-  post: (url, data: ObjectType): Promise<ResponseModel<Identifiable>> =>
-    callApiMethod("post", url, data) as Promise<ResponseModel<Identifiable>>,
+  post: (url, data: ObjectType): Promise<ResponseModel<IIdentifiable>> =>
+    callApiMethod("post", url, data) as Promise<ResponseModel<IIdentifiable>>,
 
   patch: (
     url: string,
     data: ObjectType,
     params?: ObjectType
-  ): Promise<ResponseModel<Identifiable>> =>
+  ): Promise<ResponseModel<IIdentifiable>> =>
     callApiMethod("patch", url, data, params) as Promise<
-      ResponseModel<Identifiable>
+      ResponseModel<IIdentifiable>
     >,
 
   delete: (url: string, params?: ObjectType): Promise<DeleteResponse> =>

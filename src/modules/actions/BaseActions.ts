@@ -1,5 +1,5 @@
 import BaseStore from "modules/store/BaseStore";
-import Identifiable from "modules/types/Identifiable";
+import IIdentifiable from "modules/types/IIdentifiable";
 import ObjectType from "modules/types/ObjectType";
 import BaseApi from "modules/api/BaseApi";
 
@@ -11,18 +11,18 @@ import BaseApi from "modules/api/BaseApi";
  * can to use custom actions class.
  */
 export default class BaseActions {
-  protected _mainStore: BaseStore<Identifiable, Identifiable>;
-  protected _api: BaseApi<Identifiable>;
+  protected _mainStore: BaseStore<IIdentifiable, IIdentifiable>;
+  protected _api: BaseApi<IIdentifiable>;
 
-  get mainStore(): BaseStore<Identifiable, Identifiable> {
+  get mainStore(): BaseStore<IIdentifiable, IIdentifiable> {
       return this._mainStore;
   }
 
-  get api(): BaseApi<Identifiable> {
+  get api(): BaseApi<IIdentifiable> {
     return this._api;
   }
 
-  constructor(mainStore: BaseStore<Identifiable, Identifiable>, api) {
+  constructor(mainStore: BaseStore<IIdentifiable, IIdentifiable>, api) {
     this._mainStore = mainStore;
     this._api = api;
   }
@@ -37,7 +37,7 @@ export default class BaseActions {
 
   getList = async () => {
     const searchParams = this._mainStore.searchParams;
-    const response = await this._api.getList(searchParams);
+    const response = await this._api.getList(searchParams as unknown as ObjectType);
     if (response.results)
       this._mainStore.setListModule({
         results: response.results,
@@ -53,7 +53,7 @@ export default class BaseActions {
     }
   };
 
-  update = async (model: Identifiable) => {
+  update = async (model: IIdentifiable) => {
     const editModule = await this._api.update(model);
     if (editModule.model) {
       await this.getList(); // for apply filters
