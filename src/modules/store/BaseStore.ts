@@ -8,41 +8,41 @@ import Identifiable from "modules/types/Identifiable";
  * It is not required for all stores to use BaseStore or BaseStore child class! For specific stores can
  * to use custom store class.
  *
- * Note:
- * instead modules in common state (list, searchParams, edit) can use multiple small stores:
- *   BaseListStore, SearchParamsStore, BaseEditModelStore, BaseSelectedItemStore
+ * Notes:
+ * * You can use multiple small stores instead store with multiple states (list, searchParams, edit):
+ *   BaseListStore, SearchParamsStore, BaseEditStore.
+ * * You can use constructor function factory function or objects instead classes.
  */
 export default class BaseStore<TListItem extends Identifiable, TEditModel extends Identifiable> {
   @observable
-  protected state: {
-    list: ListModule<TListItem>;
-    searchParams: SearchParams;
-    edit: EditModule<TEditModel>;
-  } = {
-    list: {
-      results: []
-    },
-    searchParams: {
-      filters: {},
-      paging: {},
-    },
-    edit: {},
+  protected listState: ListModule<TListItem> = {
+    results: []
+  };
+
+  @observable
+  protected searchParamsState: SearchParams = {
+    filters: {},
+    paging: {},
+  };
+
+  @observable
+  protected editState: EditModule<TEditModel> = {
   };
 
   constructor() {
-    makeObservable<BaseStore<TListItem, TEditModel>, "state">(this);
+    makeObservable<BaseStore<TListItem, TEditModel>>(this);
   }
 
   get list(): TListItem[] {
-    return this.state.list.results;
+    return this.listState.results;
   }
 
   get editModel(): TEditModel | undefined {
-    return this.state.edit.model;
+    return this.editState.model;
   }
 
   get searchParams(): SearchParams {
-    return this.state.searchParams;
+    return this.searchParamsState;
   }
 
   get filters(): FiltersType | undefined {
@@ -50,7 +50,7 @@ export default class BaseStore<TListItem extends Identifiable, TEditModel extend
   }
 
   @action setListModule(list: ListModule<TListItem>) {
-    this.state.list = list;
+    this.listState = list;
   }
 
   @action addToList(item: TListItem) {
@@ -58,11 +58,11 @@ export default class BaseStore<TListItem extends Identifiable, TEditModel extend
   }
 
   @action setEditModule(editModule: EditModule<TEditModel>) {
-    this.state.edit = editModule;
+    this.editState = editModule;
   }
 
   @action clearEditModule() {
-    this.state.edit = {};
+    this.editState = {};
   }
 
   @action updateListItem(item: TListItem) {
