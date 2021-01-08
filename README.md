@@ -1,9 +1,8 @@
 todo:
-* add real 3rd party server
-* remove mobx-react (it for class components only) and add mobx-react-lite (for functional components only) 
- * remove style in js
-* remove any
-
+* add real 3rd party server:    
+https://jsonplaceholder.typicode.com/guide/
+https://jsonplaceholder.typicode.com/todos?completed=true
+https://jsonplaceholder.typicode.com/todos?completed=true&_limit=5&_start=3&_page=18
 
 ## Description
  

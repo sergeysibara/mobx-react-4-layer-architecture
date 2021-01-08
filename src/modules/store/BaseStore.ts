@@ -1,13 +1,13 @@
 import { observable, action, makeObservable } from "mobx";
 import { IEditState, IListState, ISearchParamsState } from "./types";
 import IIdentifiable from "modules/types/IIdentifiable";
-import ObjectType from "../types/ObjectType";
+import ObjectType from "modules/types/ObjectType";
 
 /**
  * Base class for stores.
  *
  * It is not required for all stores to use BaseStore or BaseStore child class! For specific stores can
- * to use custom store class.
+ * use custom store class.
  *
  * Notes:
  * * You can use multiple small stores instead store with multiple states (list, searchParams, edit):
@@ -54,31 +54,37 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
     this.listState = list;
   }
 
-  @action addToList(item: TListItem) {
+  @action
+  addToList(item: TListItem) {
     this.list.push(item);
   }
 
-  @action setEditModule(editModule: IEditState<TEditModel>) {
+  @action
+  setEditModule(editModule: IEditState<TEditModel>) {
     this.editState = editModule;
   }
 
-  @action clearEditModule() {
+  @action
+  clearEditModule() {
     this.editState = {};
   }
 
-  @action updateListItem(item: TListItem) {
+  @action
+  updateListItem(item: TListItem) {
     const foundTodo = this.list.find(i => i.id === item.id);
     Object.assign(foundTodo, item);
   }
 
-  @action deleteFromList(id: number) {
+  @action
+  deleteFromList(id: number) {
     const foundIndex = this.list.findIndex(i => i.id === id);
     if (foundIndex !== -1) {
       this.list.splice(foundIndex, 1);
     }
   }
 
-  @action setFilters(filters: ObjectType) {
+  @action
+  setFilters(filters: ObjectType) {
     this.searchParams.filters = filters;
   }
 }
