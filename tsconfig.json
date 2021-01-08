@@ -21,7 +21,8 @@
     "isolatedModules": true,
     "noImplicitAny": false,
     "experimentalDecorators": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "useDefineForClassFields": true
   },
   "include": [
     "src"

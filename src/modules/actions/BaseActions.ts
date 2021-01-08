@@ -30,7 +30,9 @@ export default class BaseActions {
   getOne = async (id: number) => {
     this._mainStore.clearEditModule();
     const response = await this._api.getOne(id);
-    if (response.model) this._mainStore.setEditModule({ model: response.model });
+    if (response.model) {
+      this._mainStore.setEditModule({ model: response.model });
+    }
   };
 
   getList = async () => {

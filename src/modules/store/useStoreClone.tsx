@@ -1,11 +1,11 @@
 import { toJS } from "mobx";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 
 const useStoreClone = (storeValue) =>{
   const storeValueClone = toJS(storeValue);
   const [storeValueCloneObservable, setLocalStoreValue] = useState(storeValueClone);
 
-  useEffect(()=>{
+  useMemo(()=>{
     setLocalStoreValue(storeValue);
   },[storeValue]);
 
