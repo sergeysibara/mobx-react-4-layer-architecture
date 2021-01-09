@@ -47,3 +47,5 @@ export default class BaseApi<T extends IIdentifiable> {
     return await apiService.delete(`${this._apiUrl}/${id}`);
   };
 }
+
+export type BaseApiType = BaseApi<IIdentifiable>;

@@ -1,7 +1,7 @@
-import BaseStore from "modules/store/BaseStore";
+import { BaseStoreType } from "modules/store/BaseStore";
+import { BaseApiType } from "modules/api/BaseApi";
 import IIdentifiable from "modules/types/IIdentifiable";
 import ObjectType from "modules/types/ObjectType";
-import BaseApi from "modules/api/BaseApi";
 
 /**
  * Base class for action group.
@@ -11,68 +11,68 @@ import BaseApi from "modules/api/BaseApi";
  * can to use custom actions class.
  */
 export default class BaseActions {
-  protected _mainStore: BaseStore<IIdentifiable, IIdentifiable>;
-  protected _api: BaseApi<IIdentifiable>;
+  private readonly _mainStore: BaseStoreType;
+  private readonly _api: BaseApiType;
 
-  get mainStore(): BaseStore<IIdentifiable, IIdentifiable> {
+  get mainStore(): BaseStoreType {
       return this._mainStore;
   }
 
-  get api(): BaseApi<IIdentifiable> {
+  get api(): BaseApiType {
     return this._api;
   }
 
-  constructor(mainStore: BaseStore<IIdentifiable, IIdentifiable>, api) {
+  constructor(mainStore: BaseStoreType, api: BaseApiType) {
     this._mainStore = mainStore;
     this._api = api;
   }
 
-  getOne = async (id: number) => {
-    this._mainStore.clearEditModule();
-    const response = await this._api.getOne(id);
+  getOne = async (id: number): Promise<void> => {
+    this.mainStore.clearEditModule();
+    const response = await this.api.getOne(id);
     if (response.model) {
-      this._mainStore.setEditModule({ model: response.model });
+      this.mainStore.setEditModule({ model: response.model });
     }
   };
 
-  getList = async () => {
-    const searchParams = this._mainStore.searchParams;
-    const response = await this._api.getList(searchParams as unknown as ObjectType);
+  getList = async (): Promise<void> => {
+    const searchParams = this.mainStore.searchParams;
+    const response = await this.api.getList(searchParams as unknown as ObjectType);
     if (response.results)
-      this._mainStore.setListModule({
+      this.mainStore.setListModule({
         results: response.results,
         count: response.count
       });
   };
 
-  create = async (modelData: ObjectType) => {
-    const response = await this._api.create(modelData);
+  create = async (modelData: ObjectType): Promise<void> => {
+    const response = await this.api.create(modelData);
     if (response.model) {
       await this.getList(); // for apply filters
-      // this._mainStore.addToList(response.model);
+      // this.mainStore.addToList(response.model);
     }
   };
 
-  update = async (model: IIdentifiable) => {
-    const editModule = await this._api.update(model);
+  update = async (model: IIdentifiable): Promise<void> => {
+    const editModule = await this.api.update(model);
     if (editModule.model) {
       await this.getList(); // for apply filters
-      //this._mainStore.updateListItem(editModule.model);
+      //this.mainStore.updateListItem(editModule.model);
     }
   };
 
-  clearEditModule = () => {
-    this._mainStore.clearEditModule();
+  clearEditModule = (): void => {
+    this.mainStore.clearEditModule();
   };
 
-  delete = async (id: number) => {
-    const response = await this._api.delete(id);
+  delete = async (id: number): Promise<void> => {
+    const response = await this.api.delete(id);
     if (!response.isError) {
-      this._mainStore.deleteFromList(id);
+      this.mainStore.deleteFromList(id);
     }
   };
 
-  setFilters = filterParams => {
-    this._mainStore.setFilters(filterParams);
+  setFilters = (filterParams: ObjectType): void => {
+    this.mainStore.setFilters(filterParams);
   };
 }

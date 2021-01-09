@@ -4,6 +4,9 @@ https://jsonplaceholder.typicode.com/guide/
 https://jsonplaceholder.typicode.com/todos?completed=true
 https://jsonplaceholder.typicode.com/todos?completed=true&_limit=5&_start=3&_page=18
 
+* try remove IIdentifiable
+
+* add Jest test for component or action
 ## Description
  
 ![](content/schemes.png)

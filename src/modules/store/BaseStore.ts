@@ -50,33 +50,34 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
     return this.searchParams?.filters;
   }
 
-  @action setListModule(list: IListState<TListItem>) {
+  @action
+  setListModule(list: IListState<TListItem>): void {
     this.listState = list;
   }
 
   @action
-  addToList(item: TListItem) {
+  addToList(item: TListItem): void  {
     this.list.push(item);
   }
 
   @action
-  setEditModule(editModule: IEditState<TEditModel>) {
+  setEditModule(editModule: IEditState<TEditModel>): void  {
     this.editState = editModule;
   }
 
   @action
-  clearEditModule() {
+  clearEditModule(): void  {
     this.editState = {};
   }
 
   @action
-  updateListItem(item: TListItem) {
+  updateListItem(item: TListItem): void  {
     const foundTodo = this.list.find(i => i.id === item.id);
     Object.assign(foundTodo, item);
   }
 
   @action
-  deleteFromList(id: number) {
+  deleteFromList(id: number): void  {
     const foundIndex = this.list.findIndex(i => i.id === id);
     if (foundIndex !== -1) {
       this.list.splice(foundIndex, 1);
@@ -84,7 +85,9 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
   }
 
   @action
-  setFilters(filters: ObjectType) {
+  setFilters(filters: ObjectType): void  {
     this.searchParams.filters = filters;
   }
 }
+
+export type BaseStoreType = BaseStore<IIdentifiable, IIdentifiable>;
