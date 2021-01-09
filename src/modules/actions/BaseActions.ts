@@ -36,7 +36,7 @@ export default class BaseActions {
   };
 
   getList = async (): Promise<void> => {
-    const searchParams = this.mainStore.searchParams;
+    const searchParams = this.mainStore.searchParamsJS;
     const response = await this.api.getList(searchParams as unknown as ObjectType);
     if (response.results)
       this.mainStore.setListModule({

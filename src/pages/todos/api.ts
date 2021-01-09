@@ -1,14 +1,12 @@
 import BaseApi from "modules/api/BaseApi";
 import IIdentifiable from "modules/types/IIdentifiable";
 
-// class TodoApi extend BaseApi // for extend and overriding
-
 export interface TodoApiModel extends IIdentifiable {
-  text: string;
+  title: string;
   completed: boolean;
 }
 
-const todoApi = new BaseApi<TodoApiModel>("/todo");
+const todoApi = new BaseApi<TodoApiModel>("/todos");
 
 export const getInstance = () => {
   return todoApi;

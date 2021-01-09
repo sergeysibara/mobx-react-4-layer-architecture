@@ -6,6 +6,7 @@ import * as Actions from "../actions";
 import { FilterVisibility } from "../consts";
 
 const actions = Actions.getInstance();
+const todoStore = TodoStore.getInstance();
 
 type MouseEventHandlerType = (e: React.MouseEvent, additionalParam: string) => void;
 
@@ -14,7 +15,7 @@ const FilterButton = observer<{
   filterValue: string;
   onClick: MouseEventHandlerType; //or Function;
 }>(({ children, filterValue, onClick, ...props }) => {
-    const visibilityFilter = TodoStore.getInstance().visibilityFilter;
+    const visibilityFilter = todoStore.visibilityFilter;
     return (
       <Button
         variant="contained"

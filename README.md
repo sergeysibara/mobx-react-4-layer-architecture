@@ -1,12 +1,13 @@
 todo:
-* add real 3rd party server:    
-https://jsonplaceholder.typicode.com/guide/
-https://jsonplaceholder.typicode.com/todos?completed=true
 https://jsonplaceholder.typicode.com/todos?completed=true&_limit=5&_start=3&_page=18
+* use completed filter instead visibility
+* save limit filter (merge filters in store or actions instead replace)
+* add/edit/remove
 
 * try remove IIdentifiable
 
 * add Jest test for component or action
+* after test try replace getInstance to class { static getInstance}
 ## Description
  
 ![](content/schemes.png)

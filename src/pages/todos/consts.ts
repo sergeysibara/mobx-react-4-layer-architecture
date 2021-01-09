@@ -4,5 +4,8 @@
 export enum FilterVisibility {
   All = "all",
   Active = "active",
-  Completed = "completed",
+  Completed = "completed"
+/*  All = "",
+  Active = "false",
+  Completed = "true",*/
 }

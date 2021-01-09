@@ -8,7 +8,7 @@ import IIdentifiable from "modules/types/IIdentifiable";
 import ObjectType from "modules/types/ObjectType";
 
 export default class BaseApi<T extends IIdentifiable> {
-  protected _apiUrl: string;
+  private readonly _apiUrl: string;
 
   get apiUrl(): string {
     return this._apiUrl;
@@ -18,33 +18,40 @@ export default class BaseApi<T extends IIdentifiable> {
     this._apiUrl = apiUrl;
   }
 
-  getOne = async (id: number): Promise<ResponseModel<T>> => {
-    return (await apiService.get(`${this._apiUrl}/${id}`)) as Promise<
-      ResponseModel<T>
-    >;
+  getOne = async (
+    id: number,
+    config?: ObjectType
+  ): Promise<ResponseModel<T>> => {
+    return (await apiService.get(`${this._apiUrl}/${id}`, config)).data;
   };
 
-  getList = async (params: ObjectType): Promise<ResponseList<T>> => {
-    return (await apiService.get(this._apiUrl, params)) as Promise<
-      ResponseList<T>
-    >;
+  getList = async (
+    config?: ObjectType
+  ): Promise<ResponseList<T>> => {
+    const results = (await apiService.get(this._apiUrl, config)).data;
+    console.log(results);
+    return {results: results} as ResponseList<T>;
   };
 
-  create = async (modelData: ObjectType): Promise<ResponseModel<T>> => {
-    return (await apiService.post(this._apiUrl, modelData)) as Promise<
-      ResponseModel<T>
-    >;
+  create = async (
+    modelData: ObjectType,
+    config?: ObjectType
+  ): Promise<ResponseModel<T>> => {
+    return (await apiService.post(this._apiUrl, modelData, config)).data;
   };
 
-  update = async (modelData: { id: number }): Promise<ResponseModel<T>> => {
-    return (await apiService.patch(
-      `${this._apiUrl}/${modelData.id}`,
-      modelData
-    )) as Promise<ResponseModel<T>>;
+  update = async (
+    modelData: { id: number },
+    config?: ObjectType
+  ): Promise<ResponseModel<T>> => {
+    return (await apiService.patch(`${this._apiUrl}/${modelData.id}`, modelData, config)).data;
   };
 
-  delete = async (id: number): Promise<DeleteResponse> => {
-    return await apiService.delete(`${this._apiUrl}/${id}`);
+  delete = async (
+    id: number,
+    config?: ObjectType
+  ): Promise<DeleteResponse> => {
+      return (await apiService.delete(`${this._apiUrl}/${id}`, config)).data;
   };
 }
 

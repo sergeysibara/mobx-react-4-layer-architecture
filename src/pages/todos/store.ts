@@ -4,7 +4,7 @@ import { FilterVisibility } from "./consts";
 import { computed } from "mobx";
 
 export interface TodoModel extends IIdentifiable {
-  text: string;
+  title: string;
   completed: boolean;
 }
 

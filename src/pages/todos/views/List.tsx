@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
@@ -13,6 +13,7 @@ import * as Actions from "../actions";
 import { TodoModel } from "../store";
 
 const actions = Actions.getInstance();
+const todoStore = TodoStore.getInstance();
 
 // for update view without server
 // import useStoreClone from 'modules/store/useStoreClone';
@@ -31,9 +32,13 @@ const TodoList = observer(() => {
     actions.update({ id: item.id, completed: !item.completed } as TodoModel);
   };
 
+  useEffect(()=>{
+    actions.getList();
+  },[]);
+
   return (
     <List>
-      {TodoStore.getInstance().list.map((item) => (
+      {todoStore.list.map((item) => (
         <ListItem key={item.id} dense button>
           <Checkbox
             tabIndex={-1}
@@ -46,7 +51,7 @@ const TodoList = observer(() => {
               e.stopPropagation();
             }}
           />
-          <ListItemText primary={item.text} />
+          <ListItemText primary={item.title} />
           <ListItemSecondaryAction>
             <IconButton
               aria-label="Edit"

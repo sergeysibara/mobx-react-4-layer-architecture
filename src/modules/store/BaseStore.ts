@@ -1,4 +1,4 @@
-import { observable, action, makeObservable } from "mobx";
+import { observable, action, makeObservable, computed, toJS } from "mobx";
 import { IEditState, IListState, ISearchParamsState } from "./types";
 import IIdentifiable from "modules/types/IIdentifiable";
 import ObjectType from "modules/types/ObjectType";
@@ -22,7 +22,10 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
 
   @observable
   protected searchParamsState: ISearchParamsState = {
-    filters: {},
+    filters: {
+      limit: 5,
+      completed: false
+    },
     paging: {},
   };
 
@@ -44,6 +47,10 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
 
   get searchParams(): ISearchParamsState {
     return this.searchParamsState;
+  }
+
+  get searchParamsJS(): ISearchParamsState {
+    return toJS(this.searchParamsState);
   }
 
   get filters(): ObjectType {

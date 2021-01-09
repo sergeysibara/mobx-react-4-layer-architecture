@@ -7,18 +7,19 @@ import * as TodoStore from "../store";
 import { TodoModel } from "../store";
 
 const actions = Actions.getInstance();
+const todoStore = TodoStore.getInstance();
 
 const TodoForm = observer(() => {
-  const todoModel = TodoStore.getInstance().editModel;
+  const todoModel = todoStore.editModel;
   const isNew = !todoModel;
 
   const [todoText, setTodoText, todoTextBind] = useInputBind(
-    todoModel ? todoModel.text : ""
+    todoModel ? todoModel.title : ""
   );
 
   useEffect(() => {
     if (todoModel) {
-      setTodoText(todoModel.text);
+      setTodoText(todoModel.title);
     }
   }, [todoModel, setTodoText]);
 
