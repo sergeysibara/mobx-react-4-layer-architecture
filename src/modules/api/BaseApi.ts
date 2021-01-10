@@ -20,38 +20,38 @@ export default class BaseApi<T extends IIdentifiable> {
 
   getOne = async (
     id: number,
-    config?: ObjectType
+    params?: ObjectType
   ): Promise<ResponseModel<T>> => {
-    return (await apiService.get(`${this._apiUrl}/${id}`, config)).data;
+    return (await apiService.get(`${this._apiUrl}/${id}`, { params })).data;
   };
 
   getList = async (
-    config?: ObjectType
+    params?: ObjectType
   ): Promise<ResponseList<T>> => {
-    const results = (await apiService.get(this._apiUrl, config)).data;
+    const results = (await apiService.get(this._apiUrl, { params })).data;
     console.log(results);
     return {results: results} as ResponseList<T>;
   };
 
   create = async (
     modelData: ObjectType,
-    config?: ObjectType
+    params?: ObjectType
   ): Promise<ResponseModel<T>> => {
-    return (await apiService.post(this._apiUrl, modelData, config)).data;
+    return (await apiService.post(this._apiUrl, modelData, { params })).data;
   };
 
   update = async (
     modelData: { id: number },
-    config?: ObjectType
+    params?: ObjectType
   ): Promise<ResponseModel<T>> => {
-    return (await apiService.patch(`${this._apiUrl}/${modelData.id}`, modelData, config)).data;
+    return (await apiService.patch(`${this._apiUrl}/${modelData.id}`, modelData, { params })).data;
   };
 
   delete = async (
     id: number,
-    config?: ObjectType
+    params?: ObjectType
   ): Promise<DeleteResponse> => {
-      return (await apiService.delete(`${this._apiUrl}/${id}`, config)).data;
+      return (await apiService.delete(`${this._apiUrl}/${id}`, { params })).data;
   };
 }
 

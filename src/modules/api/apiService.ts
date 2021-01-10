@@ -1,8 +1,3 @@
-import {
-  ResponseListType,
-  ResponseModelType,
-  DeleteResponse
-} from "./types";
 import ObjectType from "modules/types/ObjectType";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
@@ -14,33 +9,32 @@ type ResponseType = Promise<AxiosResponse<any>>;
 const apiService = {
   get: (
     url: string,
-    config?: ObjectType,
+    config?: AxiosRequestConfig,
   ): ResponseType => {
-    console.log(config)
-    return axios.get(url, config as AxiosRequestConfig);
+    return axios.get(url,  config);
   },
 
   post: (
     url: string,
     data: ObjectType,
-    config?: ObjectType
+    config?: AxiosRequestConfig
   ): ResponseType => {
-    return axios.post(url, data, config as AxiosRequestConfig);
+    return axios.post(url, data, config);
   },
 
   patch: (
     url: string,
     data: ObjectType,
-    config?: ObjectType
+    config?: AxiosRequestConfig
   ): ResponseType => {
-    return axios.patch(url, data, config as AxiosRequestConfig);
+    return axios.patch(url, data, config);
   },
 
   delete: (
     url: string,
-    config?: ObjectType
+    config?: AxiosRequestConfig
   ): ResponseType => {
-    return axios.delete(url, config as AxiosRequestConfig);
+    return axios.delete(url, config);
   }
 };
 

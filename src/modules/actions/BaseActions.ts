@@ -37,7 +37,8 @@ export default class BaseActions {
 
   getList = async (): Promise<void> => {
     const searchParams = this.mainStore.searchParamsJS;
-    const response = await this.api.getList(searchParams as unknown as ObjectType);
+    const filters = {...searchParams.filters, ...searchParams.paging, ...searchParams.sorting};
+    const response = await this.api.getList(filters);
     if (response.results)
       this.mainStore.setListModule({
         results: response.results,
@@ -73,6 +74,7 @@ export default class BaseActions {
   };
 
   setFilters = (filterParams: ObjectType): void => {
+    console.log(filterParams);
     this.mainStore.setFilters(filterParams);
   };
 }

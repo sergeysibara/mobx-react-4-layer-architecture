@@ -11,12 +11,20 @@ export interface IListState<TListItem extends IIdentifiable> {
 }
 
 export interface ISearchParamsState {
-  filters: ObjectType;
-  sorting?: string;
-  paging: {
-    offset?: number;
-    pageNumber?: number;
-    pageSize?: number;
+  // https://github.com/typicode/json-server#filter
+  filters?: ObjectType;
+
+  // https://github.com/typicode/json-server#sort
+  sorting?:  {
+    _sort?: string;
+    _order?: string;
+  };
+
+  // https://github.com/typicode/json-server#paginate
+  paging?: {
+    _start?: number; // offset
+    _page?: number; // pageNumber
+    _limit?: number; // pageSize
   };
 }
 

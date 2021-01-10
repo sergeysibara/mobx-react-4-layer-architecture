@@ -23,10 +23,15 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
   @observable
   protected searchParamsState: ISearchParamsState = {
     filters: {
-      limit: 5,
-      completed: false
+      completed: true
     },
-    paging: {},
+    sorting: {
+      _sort: "title",
+      _order: "asc"
+    },
+    paging: {
+      _limit: 5,
+    },
   };
 
   @observable
@@ -92,8 +97,13 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
   }
 
   @action
-  setFilters(filters: ObjectType): void  {
-    this.searchParams.filters = filters;
+  setFilters(filters: ObjectType, merge = true): void  {
+    if (merge) {
+      this.searchParams.filters = { ...this.searchParams.filters, ...filters};
+    }
+    else  {
+      this.searchParams.filters = filters;
+    }
   }
 }
 
