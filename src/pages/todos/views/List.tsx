@@ -48,7 +48,7 @@ const TodoList = observer(() => {
             }}
             checked={item.completed}
             onClick={e => {
-              e.stopPropagation();
+              e.stopPropagation(); // preventDefault
             }}
           />
           <ListItemText primary={item.title} />
@@ -56,7 +56,7 @@ const TodoList = observer(() => {
             <IconButton
               aria-label="Edit"
               onClick={e => {
-                e.stopPropagation();
+                e.stopPropagation(); // preventDefault
                 actions.getOne(item.id);
               }}
             >
@@ -65,7 +65,7 @@ const TodoList = observer(() => {
             <IconButton
               aria-label="Delete"
               onClick={e => {
-                e.stopPropagation();
+                e.stopPropagation(); // preventDefault
                 actions.delete(item.id);
               }}
             >

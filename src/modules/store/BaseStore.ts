@@ -1,7 +1,6 @@
-import { observable, action, makeObservable, computed, toJS } from "mobx";
-import { IEditState, IListState, ISearchParamsState } from "./types";
+import { observable, action, makeObservable } from "mobx";
+import { IEditState, IListState } from "./types";
 import IIdentifiable from "modules/types/IIdentifiable";
-import ObjectType from "modules/types/ObjectType";
 
 /**
  * Base class for stores.
@@ -21,20 +20,6 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
   };
 
   @observable
-  protected searchParamsState: ISearchParamsState = {
-    filters: {
-      completed: true
-    },
-    sorting: {
-      _sort: "title",
-      _order: "asc"
-    },
-    paging: {
-      _limit: 5,
-    },
-  };
-
-  @observable
   protected editState: IEditState<TEditModel> = {
   };
 
@@ -50,20 +35,8 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
     return this.editState.model;
   }
 
-  get searchParams(): ISearchParamsState {
-    return this.searchParamsState;
-  }
-
-  get searchParamsJS(): ISearchParamsState {
-    return toJS(this.searchParamsState);
-  }
-
-  get filters(): ObjectType {
-    return this.searchParams?.filters;
-  }
-
   @action
-  setListModule(list: IListState<TListItem>): void {
+  setListState(list: IListState<TListItem>): void {
     this.listState = list;
   }
 
@@ -73,12 +46,12 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
   }
 
   @action
-  setEditModule(editModule: IEditState<TEditModel>): void  {
-    this.editState = editModule;
+  setEditState(editState: IEditState<TEditModel>): void  {
+    this.editState = editState;
   }
 
   @action
-  clearEditModule(): void  {
+  clearEditState(): void  {
     this.editState = {};
   }
 
@@ -96,15 +69,15 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
     }
   }
 
-  @action
-  setFilters(filters: ObjectType, merge = true): void  {
-    if (merge) {
-      this.searchParams.filters = { ...this.searchParams.filters, ...filters};
-    }
-    else  {
-      this.searchParams.filters = filters;
-    }
-  }
+  // @action
+  // setFilters(filters: ObjectType, merge = true): void  {
+  //   if (merge) {
+  //     this.searchParams.filters = { ...this.searchParams.filters, ...filters};
+  //   }
+  //   else  {
+  //     this.searchParams.filters = filters;
+  //   }
+  // }
 }
 
 export type BaseStoreType = BaseStore<IIdentifiable, IIdentifiable>;
