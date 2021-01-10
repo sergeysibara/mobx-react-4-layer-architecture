@@ -34,7 +34,7 @@ export default class SearchParamsStore<T extends IFiltersState> {
 
   @observable
   protected pagingState: PagingStateType = {
-    _limit: 5
+    _limit: 10
   };
 
   @observable

@@ -69,15 +69,6 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
     }
   }
 
-  // @action
-  // setFilters(filters: ObjectType, merge = true): void  {
-  //   if (merge) {
-  //     this.searchParams.filters = { ...this.searchParams.filters, ...filters};
-  //   }
-  //   else  {
-  //     this.searchParams.filters = filters;
-  //   }
-  // }
 }
 
 export type BaseStoreType = BaseStore<IIdentifiable, IIdentifiable>;

@@ -1,22 +1,33 @@
-import SearchParamsStore, { IFiltersState, SearchParamsStoreType } from "modules/store/SearchParamsStore";
-// import { FilterVisibility } from "./consts";
-// import { computed, trace } from "mobx";
-//
+import SearchParamsStore, {
+  IFiltersState,
+} from "modules/store/SearchParamsStore";
+
 export interface ITodoFiltersState extends IFiltersState {
   completed?: boolean;
 }
 
-// todo НАСЛЕДОВАНИЕ ПРОВЕРИТЬ, что state будет работать (конструктор не забыть переопределить)
-// export class SearchParamsTodoStores extends SearchParamsStore<IFiltersState> {
-//   @computed get visibilityFilter(): string {
-//     return this.filters && (this.filters.visibility)
-//       ? (this.filters.visibility as string)
-//       : FilterVisibility.All;
+// // inheritance example
+// export class SearchParamsTodoStore<T extends ITodoFiltersState> extends SearchParamsStore<IFiltersState> {
+//   protected pagingState: PagingStateType = {
+//     _limit: 5
+//   };
+//
+//   protected filtersState: ITodoFiltersState = {
+//     completed: false
+//   };
+//
+//   // constructor(filters?: T, paging?: PagingStateType, sorting?: SortingStateType) {
+//   //   super(filters, paging, sorting);
+//   //   makeObservable(this);
+//   // }
+//
+//   @computed get visibilityFilter() {
+//     return (this.filtersState as T).completed;
 //   }
 // }
 
 const todoStore = new SearchParamsStore<ITodoFiltersState>({
-  completed: true,
+  completed: undefined,
 });
 const getInstance = () => {
   return todoStore;
