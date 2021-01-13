@@ -3,6 +3,7 @@ import { SearchParamsStoreType } from "modules/store/SearchParamsStore";
 import { BaseApiType } from "modules/api/BaseApi";
 import IIdentifiable from "modules/types/IIdentifiable";
 import ObjectType from "modules/types/ObjectType";
+import { isIResponseError } from "modules/api/types";
 
 /**
  * Base class for action group.
@@ -37,33 +38,61 @@ export default class BaseActions {
   getOne = async (id: number): Promise<void> => {
     this.mainStore.clearEditState();
     const response = await this.api.getOne(id);
-    this.mainStore.setEditState({ model: response as IIdentifiable });
+    if (isIResponseError(response)) {
+      //todo
+      //notification.error(response.message)
+    }
+    else {
+      console.log(response)
+      this.mainStore.setEditState({ model: response.model });
+    }
   };
 
   getList = async (): Promise<void> => {
     const searchParams = this._searchParamsStore.getSearchParamsMergedToJS();
     const response = await this.api.getList(searchParams);
-    if (response.results)
+    if (isIResponseError(response)) {
+      //todo
+      //notification.error(response.message)
+    }
+    else {
       this.mainStore.setListState({
         results: response.results,
         count: response.count
       });
+    }
+
   };
 
   create = async (modelData: ObjectType): Promise<void> => {
     const response = await this.api.create(modelData);
-    if (response) {
-      // await this.getList(); // for apply filters
-      this.mainStore.addToList(response as IIdentifiable);
+    if (isIResponseError(response)) {
+      //todo
+      //notification.error(response.message)
     }
+    else {
+      // await this.getList(); // for apply filters
+      this.mainStore.addToList(response.model);
+    }
+    // if (response) {
+    //   // await this.getList(); // for apply filters
+    //   this.mainStore.addToList(response as IIdentifiable);
+    // }
   };
 
   update = async (model: IIdentifiable): Promise<void> => {
     const response = await this.api.update(model);
-    if (response) {
-      // await this.getList(); // for apply filters
-      this.mainStore.updateListItem(response as IIdentifiable);
+    if (isIResponseError(response)) {
+      //todo
+      //notification.error(response.message)
     }
+    else {
+      this.mainStore.updateListItem(response.model);
+    }
+    // if (response) {
+    //   // await this.getList(); // for apply filters
+    //   this.mainStore.updateListItem(response as IIdentifiable);
+    // }
   };
 
   // todo check observable clearing
@@ -73,7 +102,11 @@ export default class BaseActions {
 
   delete = async (id: number): Promise<void> => {
     const response = await this.api.delete(id);
-    if (!response.isError) {
+    if (isIResponseError(response)) {
+      //todo
+      //notification.error(response.message)
+    }
+    else {
       this.mainStore.deleteFromList(id);
     }
   };

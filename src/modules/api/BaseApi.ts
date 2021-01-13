@@ -2,11 +2,11 @@ import apiService, { ApiServiceResponseType } from "./apiService";
 import {
   ResponseList,
   ResponseModel,
-  DeleteResponse
+  DeleteResponse,
+  IResponseError
 } from "./types";
 import IIdentifiable from "modules/types/IIdentifiable";
 import ObjectType from "modules/types/ObjectType";
-import { AxiosResponse } from "axios";
 
 export default class BaseApi<T extends IIdentifiable> {
   private readonly _apiUrl: string;
@@ -19,56 +19,90 @@ export default class BaseApi<T extends IIdentifiable> {
     this._apiUrl = apiUrl;
   }
 
-  getOne = async (
+  getOne = async(
     id: number,
     params?: ObjectType
-  ): Promise<ResponseModel<T>> => { //  AxiosResponse<any> => {
+  ): Promise<ResponseModel<T> | IResponseError> => {
 
     try {
       const ret = await apiService.get(`${this._apiUrl}/${id}`, { params });
-      return ret.data;
+      return { model: ret.data };
     } catch (error) {
-      console.log(error);
-      return error;
+      return this.handleError(error);
     }
-    //const ret = await apiService.get(`${this._apiUrl}/${id}`, { params })
-      // .then(response => response.data)
-      // .catch((e: Error) => {
-      // console.log(e);
-      //return e as Promise<ResponseModel<T>>
-
-    //console.log(ret);
-   // return ret; //Error
   };
 
   getList = async (
     params?: ObjectType
-  ): Promise<ResponseList<T>> => {
-    const results = (await apiService.get(this._apiUrl, { params })).data;
-    return {results: results} as ResponseList<T>;
+  ): Promise<ResponseList<T> | IResponseError> => {
+    try {
+      const ret = await apiService.get(this._apiUrl, { params });
+      return { results: ret.data || []};
+    } catch (error) {
+      return this.handleError(error);
+    }
   };
 
   create = async (
     modelData: ObjectType,
     params?: ObjectType
-  ): Promise<ResponseModel<T>> => {
-    return (await apiService.post(this._apiUrl, modelData, { params })).data;
+  ): Promise<ResponseModel<T> | IResponseError> => {
+    try {
+      const ret = await apiService.post(this._apiUrl, modelData, { params });
+      return { model: ret.data };
+    } catch (error) {
+      return this.handleError(error);
+    }
   };
 
   update = async (
     modelData: { id: number },
     params?: ObjectType
-  ): Promise<ResponseModel<T>> => {
-    const ret = (await apiService.patch(`${this._apiUrl}/${modelData.id}`, modelData, { params }));
-    console.log(ret);
-    return ret.data;
+  ): Promise<ResponseModel<T> | IResponseError> => {
+    try {
+      const ret = await apiService.patch(`${this._apiUrl}/${modelData.id}`, modelData, { params });
+      return { model: ret.data };
+    } catch (error) {
+      return this.handleError(error);
+    }
   };
 
   delete = async (
     id: number,
     params?: ObjectType
-  ): Promise<DeleteResponse> => {
-      return (await apiService.delete(`${this._apiUrl}/${id}`, { params })).data;
+  ): Promise<DeleteResponse | IResponseError> => {
+    try {
+      const ret = await apiService.delete(`${this._apiUrl}/${id}`, { params });
+      return { id: ret.data };
+    } catch (error) {
+      return this.handleError(error);
+    }
+  };
+
+  protected handleError = (e): IResponseError => {
+    let message = '';
+    console.log(e);
+    if (e.response) {
+      switch (e.response.status) {
+        // case 400: {
+        //   const { statusCode, ...errors } = e.response.data;
+        //   message = Object.values(errors).join(' ');
+        //   break;
+        // }
+        //
+        // case 403:
+        // case 404: {
+        //   message = e.response.details || e.message;
+        //   break;
+        // }
+        default: {
+          message = e.message;
+          break;
+        }
+      }
+    }
+
+    return { isError: true, message };
   };
 }
 

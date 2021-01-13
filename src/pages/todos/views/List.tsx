@@ -35,7 +35,6 @@ const TodoList = observer(() => {
   useEffect(()=>{
     actions.getList();
   },[]);
-
   return (
     <List>
       {todoStore.list.map((item) => (
@@ -46,7 +45,7 @@ const TodoList = observer(() => {
             onChange={() => {
               handleChange(item);
             }}
-            checked={item.completed}
+            checked={item.completed || false}
             onClick={e => {
               e.stopPropagation(); // preventDefault
             }}

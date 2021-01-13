@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import * as Store from "../searchParamsStore";
 import { observer } from "mobx-react-lite";
 import * as Actions from "../actions";
+import Typography from "@material-ui/core/Typography";
 // import { FilterVisibility } from "../consts";
 
 const actions = Actions.getInstance();
@@ -38,7 +39,8 @@ const FilterButton = observer<{
 const Filters = ({ onChange }: {onChange: MouseEventHandlerType}) => {
   return (
     <div>
-      <span>Show: </span>
+      <Typography variant="h6" color="secondary">{"A fake server is used - https://jsonplaceholder.typicode.com"}</Typography>
+      <Typography variant="h6" color="secondary">{"Changes are faked and aren't persisted! Changes will be discarded after changing the filter bellow!"}</Typography>
       <FilterButton onClick={onChange}>
         All
       </FilterButton>
