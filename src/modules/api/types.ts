@@ -1,5 +1,6 @@
 import IIdentifiable from "modules/types/IIdentifiable";
 
+// todo remove it
 export interface ResponseModel<T extends IIdentifiable> {
   model?: T;
   isError?: boolean;

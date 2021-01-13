@@ -1,4 +1,4 @@
-import apiService from "./apiService";
+import apiService, { ApiServiceResponseType } from "./apiService";
 import {
   ResponseList,
   ResponseModel,
@@ -6,6 +6,7 @@ import {
 } from "./types";
 import IIdentifiable from "modules/types/IIdentifiable";
 import ObjectType from "modules/types/ObjectType";
+import { AxiosResponse } from "axios";
 
 export default class BaseApi<T extends IIdentifiable> {
   private readonly _apiUrl: string;
@@ -21,15 +22,29 @@ export default class BaseApi<T extends IIdentifiable> {
   getOne = async (
     id: number,
     params?: ObjectType
-  ): Promise<ResponseModel<T>> => {
-    return (await apiService.get(`${this._apiUrl}/${id}`, { params })).data;
+  ): Promise<ResponseModel<T>> => { //  AxiosResponse<any> => {
+
+    try {
+      const ret = await apiService.get(`${this._apiUrl}/${id}`, { params });
+      return ret.data;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+    //const ret = await apiService.get(`${this._apiUrl}/${id}`, { params })
+      // .then(response => response.data)
+      // .catch((e: Error) => {
+      // console.log(e);
+      //return e as Promise<ResponseModel<T>>
+
+    //console.log(ret);
+   // return ret; //Error
   };
 
   getList = async (
     params?: ObjectType
   ): Promise<ResponseList<T>> => {
     const results = (await apiService.get(this._apiUrl, { params })).data;
-    console.log(results);
     return {results: results} as ResponseList<T>;
   };
 
@@ -44,7 +59,9 @@ export default class BaseApi<T extends IIdentifiable> {
     modelData: { id: number },
     params?: ObjectType
   ): Promise<ResponseModel<T>> => {
-    return (await apiService.patch(`${this._apiUrl}/${modelData.id}`, modelData, { params })).data;
+    const ret = (await apiService.patch(`${this._apiUrl}/${modelData.id}`, modelData, { params }));
+    console.log(ret);
+    return ret.data;
   };
 
   delete = async (

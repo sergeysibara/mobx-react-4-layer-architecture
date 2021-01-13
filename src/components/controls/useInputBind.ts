@@ -9,6 +9,8 @@ export default (initialValue = ""): [
   }
 ] => {
   const [value, setValue] = useState<string>(initialValue);
+
+  // todo useMemo for return
   return [
     value,
     setValue,

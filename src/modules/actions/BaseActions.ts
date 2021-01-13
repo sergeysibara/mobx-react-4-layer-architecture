@@ -37,9 +37,7 @@ export default class BaseActions {
   getOne = async (id: number): Promise<void> => {
     this.mainStore.clearEditState();
     const response = await this.api.getOne(id);
-    if (response.model) {
-      this.mainStore.setEditState({ model: response.model });
-    }
+    this.mainStore.setEditState({ model: response as IIdentifiable });
   };
 
   getList = async (): Promise<void> => {
@@ -54,21 +52,22 @@ export default class BaseActions {
 
   create = async (modelData: ObjectType): Promise<void> => {
     const response = await this.api.create(modelData);
-    if (response.model) {
-      await this.getList(); // for apply filters
-      // this.mainStore.addToList(response.model);
+    if (response) {
+      // await this.getList(); // for apply filters
+      this.mainStore.addToList(response as IIdentifiable);
     }
   };
 
   update = async (model: IIdentifiable): Promise<void> => {
-    const editModule = await this.api.update(model);
-    if (editModule.model) {
-      await this.getList(); // for apply filters
-      //this.mainStore.updateListItem(editModule.model);
+    const response = await this.api.update(model);
+    if (response) {
+      // await this.getList(); // for apply filters
+      this.mainStore.updateListItem(response as IIdentifiable);
     }
   };
 
-  clearEditModule = (): void => {
+  // todo check observable clearing
+  clearEditState = (): void => {
     this.mainStore.clearEditState();
   };
 
@@ -80,7 +79,6 @@ export default class BaseActions {
   };
 
   setFilters = (filters: ObjectType): void => {
-    console.log(filters);
     this.searchParamsStore.setFilters(filters);
   };
 }

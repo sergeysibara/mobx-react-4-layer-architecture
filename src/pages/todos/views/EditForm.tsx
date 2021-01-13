@@ -28,8 +28,9 @@ const TodoForm = observer(() => {
 
     if (trimmedText.length > 0) {
       if (todoModel) {
+        console.log({ ...todoModel, title: trimmedText })
         actions.update({ ...todoModel, title: trimmedText } as TodoModel);
-        actions.clearEditModule();
+        actions.clearEditState();
       } else {
         actions.create({ title: trimmedText });
       }

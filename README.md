@@ -1,6 +1,10 @@
 todo:
 https://jsonplaceholder.typicode.com/todos?completed=true&_limit=5&_start=3&_page=18
-* add/edit/remove
+* add/edit/remove 
+Просто сделать надпись на странице вроде "Changes are faked and aren't persisted", 
+и в случае ошибок на беке просто отображать красным ошибки в одной в поле на странице.
+ Отдельный компонент сделать, который в случае ошибки в mainStore отображает текст ошибки 
+
 
 * add Jest test for component or action
 * after test try replace getInstance to class { static getInstance}
