@@ -4,6 +4,7 @@ import { BaseApiType } from "modules/api/BaseApi";
 import IIdentifiable from "modules/types/IIdentifiable";
 import ObjectType from "modules/types/ObjectType";
 import { isIResponseError } from "modules/api/types";
+import { toast } from 'react-toastify';
 
 /**
  * Base class for action group.
@@ -39,11 +40,9 @@ export default class BaseActions {
     this.mainStore.clearEditState();
     const response = await this.api.getOne(id);
     if (isIResponseError(response)) {
-      //todo
-      //notification.error(response.message)
+      toast.error(response.message);
     }
     else {
-      console.log(response)
       this.mainStore.setEditState({ model: response.model });
     }
   };
@@ -52,8 +51,7 @@ export default class BaseActions {
     const searchParams = this._searchParamsStore.getSearchParamsMergedToJS();
     const response = await this.api.getList(searchParams);
     if (isIResponseError(response)) {
-      //todo
-      //notification.error(response.message)
+      toast.error(response.message);
     }
     else {
       this.mainStore.setListState({
@@ -67,8 +65,7 @@ export default class BaseActions {
   create = async (modelData: ObjectType): Promise<void> => {
     const response = await this.api.create(modelData);
     if (isIResponseError(response)) {
-      //todo
-      //notification.error(response.message)
+      toast.error(response.message);
     }
     else {
       // await this.getList(); // for apply filters
@@ -83,8 +80,7 @@ export default class BaseActions {
   update = async (model: IIdentifiable): Promise<void> => {
     const response = await this.api.update(model);
     if (isIResponseError(response)) {
-      //todo
-      //notification.error(response.message)
+      toast.error(response.message);
     }
     else {
       this.mainStore.updateListItem(response.model);
@@ -103,8 +99,7 @@ export default class BaseActions {
   delete = async (id: number): Promise<void> => {
     const response = await this.api.delete(id);
     if (isIResponseError(response)) {
-      //todo
-      //notification.error(response.message)
+      toast.error(response.message);
     }
     else {
       this.mainStore.deleteFromList(id);

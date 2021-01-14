@@ -1,4 +1,4 @@
-import apiService, { ApiServiceResponseType } from "./apiService";
+import apiService from "./apiService";
 import {
   ResponseList,
   ResponseModel,
@@ -81,7 +81,6 @@ export default class BaseApi<T extends IIdentifiable> {
 
   protected handleError = (e): IResponseError => {
     let message = '';
-    console.log(e);
     if (e.response) {
       switch (e.response.status) {
         // case 400: {

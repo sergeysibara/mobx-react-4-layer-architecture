@@ -57,8 +57,10 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
 
   @action
   updateListItem(item: TListItem): void  {
-    const foundTodo = this.list.find(i => i.id === item.id);
-    Object.assign(foundTodo, item);
+    const foundTodo = this.list.find(i => item && i.id === item.id);
+    if (foundTodo && item) {
+      Object.assign(foundTodo, item);
+    }
   }
 
   @action

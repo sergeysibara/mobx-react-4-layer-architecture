@@ -1,14 +1,14 @@
 todo:
 https://jsonplaceholder.typicode.com/todos?completed=true&_limit=5&_start=3&_page=18
-* add/edit/remove - add and check error notification
 
 * try check async await in action in mobx - check for my article  
 
 * add Jest test for component or action
 * after test try replace getInstance to class { static getInstance}
 
-* (optional )try remove IIdentifiable
-* (optional, no need ) split mainStore to listStore and editModelStore
+* create copy of master branch
+* merge it to master branch 
+
 ## Description
  
 ![](content/schemes.png)

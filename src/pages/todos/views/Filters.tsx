@@ -39,8 +39,9 @@ const FilterButton = observer<{
 const Filters = ({ onChange }: {onChange: MouseEventHandlerType}) => {
   return (
     <div>
-      <Typography variant="h6" color="secondary">{"A fake server is used - https://jsonplaceholder.typicode.com"}</Typography>
-      <Typography variant="h6" color="secondary">{"Changes are faked and aren't persisted! Changes will be discarded after changing the filter bellow!"}</Typography>
+      <Typography variant="h6" color="secondary">{"A fake server is used - https://jsonplaceholder.typicode.com."}</Typography>
+      <Typography variant="h6" color="secondary">{"Changes are faked and aren't persisted! A changes will not work correctly with the fake server."}</Typography>
+      <Typography variant="h6" color="secondary">{"Changes will be discarded after changing the filter bellow and after repeated updates an item!"}</Typography>
       <FilterButton onClick={onChange}>
         All
       </FilterButton>
