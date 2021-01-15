@@ -4,7 +4,6 @@ import * as Store from "../searchParamsStore";
 import { observer } from "mobx-react-lite";
 import * as Actions from "../actions";
 import Typography from "@material-ui/core/Typography";
-// import { FilterVisibility } from "../consts";
 
 const actions = Actions.getInstance();
 const store = Store.getInstance();
@@ -56,3 +55,4 @@ const Filters = ({ onChange }: {onChange: MouseEventHandlerType}) => {
 };
 
 export default Filters;
+export { FilterButton };

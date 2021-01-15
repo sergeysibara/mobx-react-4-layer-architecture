@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
@@ -8,28 +8,17 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import { observer } from "mobx-react-lite";
-import * as TodoStore from "../store";
 import * as Actions from "../actions";
-import { TodoModel } from "../store";
+import { ITodoModel } from "../store";
+import { StoresContext } from "App";
 
 const actions = Actions.getInstance();
-const todoStore = TodoStore.getInstance();
 
-// for update view without server
-// import useStoreClone from 'modules/store/useStoreClone';
-// const [todos, setLocalStoreState] = useStoreClone(todoStore.results);
-//
-// const handleChange = (item, index) => {
-//   actions.update({ id: item.id, completed: !item.completed });
-//
-//   // for update without waiting api call
-//   todos[index].completed = !item.completed;
-//   setLocalStoreState(Array.from(todos));
-// };
+const TodoList = observer( () => {
+  const { todoStore } = useContext(StoresContext);
 
-const TodoList = observer(() => {
   const handleChange = (item) => {
-    actions.update({ id: item.id, completed: !item.completed } as TodoModel);
+    actions.update({ id: item.id, completed: !item.completed } as ITodoModel);
   };
 
   useEffect(()=>{

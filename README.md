@@ -1,14 +1,15 @@
 todo:
-https://jsonplaceholder.typicode.com/todos?completed=true&_limit=5&_start=3&_page=18
-
-* try check async await in action in mobx - check for my article  
-
-* add Jest test for component or action
 * after test try replace getInstance to class { static getInstance}
+
+* add Jest test for component and for action
+* поискать useStore, чтобы вручную import контекста не передавать постоянно. Все сторы хранить в одном контексте 
+-(не надо) create [store, actions] useStoreActions(StoreType, ActionType) {useMemo[] stores[hashTypeName], actions[hashTypeName] }.
+
+* rename Actions to SideEffects (also in image)
+* preventDefault or prevent default
 
 * create copy of master branch
 * merge it to master branch 
-
 ## Description
  
 ![](content/schemes.png)
