@@ -3,7 +3,9 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import TodoList from '../List';
 import { createTodoStore } from "../../store";
-import { StoresContext } from "App";
+import { StoresContext, ActionsContext } from "App";
+import { createTodoActions } from "../../actions";
+import { createTodoSearchParamsStore } from "../../searchParamsStore";
 
 const TEST_LI_TEXT = 'testTodoItem1';
 
@@ -18,6 +20,13 @@ todoStore.setListState({
 
 const stores = {
   todoStore: todoStore,
+  todoSearchParamsStore: createTodoSearchParamsStore()
+};
+
+const todoActions = createTodoActions(stores.todoStore, createTodoSearchParamsStore() );
+
+const actions = {
+  todoActions: todoActions,
 };
 
 describe('<TodoList />', () => {
@@ -25,7 +34,9 @@ describe('<TodoList />', () => {
     test('should render item with a test text', () => {
       render(
         <StoresContext.Provider value={stores}>
-          <TodoList />
+          <ActionsContext.Provider value={actions}>
+            <TodoList />
+          </ActionsContext.Provider>
         </StoresContext.Provider>
       );
       expect(screen.getByText(TEST_LI_TEXT)).toBeInTheDocument();

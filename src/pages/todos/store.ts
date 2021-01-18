@@ -6,15 +6,7 @@ export interface ITodoModel extends IIdentifiable {
   completed: boolean;
 }
 
+export type TodoStoreType = BaseStore<ITodoModel, ITodoModel>;
+
 // for using in app and in tests
 export const createTodoStore = () => (new BaseStore<ITodoModel, ITodoModel>());
-
-// let _todoStore;
-// const getInstance = () => {
-//   if (_todoStore) {
-//     _todoStore = createTodoStore();
-//   }
-//   return _todoStore;
-// };
-//
-// export { getInstance };

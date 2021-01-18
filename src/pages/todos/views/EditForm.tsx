@@ -2,15 +2,14 @@ import React, { useContext, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import useInputBind from "components/controls/useInputBind";
 import { observer } from "mobx-react-lite";
-import * as Actions from "../actions";
 import { ITodoModel } from "../store";
-import { StoresContext } from "App";
-
-const actions = Actions.getInstance();
+import { StoresContext, ActionsContext, IStoresContextValue, IActionsContextValue } from "App";
 
 const TodoForm = observer(() => {
-  const { todoStore } = useContext(StoresContext);
-  const todoModel = todoStore.editModel;
+    const { todoStore } = useContext(StoresContext) as IStoresContextValue;
+    const { todoActions } = useContext(ActionsContext) as IActionsContextValue;
+
+  const todoModel = todoStore?.editModel;
   const isNew = !todoModel;
 
   const [todoText, setTodoText, todoTextBind] = useInputBind(
@@ -28,10 +27,10 @@ const TodoForm = observer(() => {
 
     if (trimmedText.length > 0) {
       if (todoModel) {
-        actions.update({ ...todoModel, title: trimmedText } as ITodoModel);
-        actions.clearEditState();
+        todoActions.update({ ...todoModel, title: trimmedText } as ITodoModel);
+        todoActions.clearEditState();
       } else {
-        actions.create({ title: trimmedText });
+        todoActions.create({ title: trimmedText });
       }
     }
   };

@@ -1,12 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "@material-ui/core/Button";
-import * as Store from "../searchParamsStore";
 import { observer } from "mobx-react-lite";
-import * as Actions from "../actions";
 import Typography from "@material-ui/core/Typography";
-
-const actions = Actions.getInstance();
-const store = Store.getInstance();
+import { ActionsContext, IActionsContextValue, IStoresContextValue, StoresContext } from "../../../App";
 
 type MouseEventHandlerType = (e: React.MouseEvent, additionalParam: string) => void;
 
@@ -15,14 +11,17 @@ const FilterButton = observer<{
   completed?: boolean;
   onClick: MouseEventHandlerType; //or Function;
 }>(({ children, completed, onClick, ...props }) => {
-    const visibilityFilter = store.getFilters().completed;
+  const { todoSearchParamsStore } = useContext(StoresContext) as IStoresContextValue;
+  const { todoActions } = useContext(ActionsContext) as IActionsContextValue;
+
+    const visibilityFilter = todoSearchParamsStore.getFilters().completed;
     return (
       <Button
         variant="contained"
         style={{ marginLeft: "1rem" }}
         disabled={visibilityFilter === completed}
         onClick={e => {
-          actions.setFilters({ completed });
+          todoActions.setFilters({ completed });
           if (onClick) {
             onClick(e, completed ? completed.toString(): "" );
           }

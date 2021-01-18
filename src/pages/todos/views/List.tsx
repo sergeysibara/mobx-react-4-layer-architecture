@@ -8,21 +8,19 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import { observer } from "mobx-react-lite";
-import * as Actions from "../actions";
 import { ITodoModel } from "../store";
-import { StoresContext } from "App";
-
-const actions = Actions.getInstance();
+import { ActionsContext, IActionsContextValue, IStoresContextValue, StoresContext } from "App";
 
 const TodoList = observer( () => {
-  const { todoStore } = useContext(StoresContext);
+  const { todoStore } = useContext(StoresContext) as IStoresContextValue;
+  const { todoActions } = useContext(ActionsContext) as IActionsContextValue;
 
   const handleChange = (item) => {
-    actions.update({ id: item.id, completed: !item.completed } as ITodoModel);
+    todoActions.update({ id: item.id, completed: !item.completed } as ITodoModel);
   };
 
   useEffect(()=>{
-    actions.getList();
+    todoActions.getList();
   },[]);
   return (
     <List>
@@ -45,7 +43,7 @@ const TodoList = observer( () => {
               aria-label="Edit"
               onClick={e => {
                 e.stopPropagation(); // preventDefault
-                actions.getOne(item.id);
+                todoActions.getOne(item.id);
               }}
             >
               <EditIcon />
@@ -54,7 +52,7 @@ const TodoList = observer( () => {
               aria-label="Delete"
               onClick={e => {
                 e.stopPropagation(); // preventDefault
-                actions.delete(item.id);
+                todoActions.delete(item.id);
               }}
             >
               <DeleteIcon />

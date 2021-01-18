@@ -1,13 +1,11 @@
 import * as Api from "./api";
-import { stores } from "App";
-import * as SearchParamsStore from "./searchParamsStore";
 import BaseActions from "modules/actions/BaseActions";
+import { BaseStoreType } from "../../modules/store/BaseStore";
+import { SearchParamsStoreType } from "../../modules/store/SearchParamsStore";
 
 const api = Api.getInstance();
-const searchParamsStore = SearchParamsStore.getInstance();
 
-const todoActions = new BaseActions(stores.todoStore, searchParamsStore, api);
-
-export const getInstance = () => {
-  return todoActions;
+// for using in app and in tests
+export const createTodoActions = (todoStore: BaseStoreType, todoSearchParamsStore: SearchParamsStoreType ) => {
+  return  new BaseActions(todoStore, todoSearchParamsStore, api);
 };

@@ -1,18 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import EditForm from "./EditForm";
 import List from "./List";
 import Filters from "./Filters";
-import * as Actions from "../actions";
 import Typography from '@material-ui/core/Typography';
-
-const actions = Actions.getInstance();
+import { ActionsContext, IActionsContextValue } from "App";
 
 export default function Page() {
+  const { todoActions } = useContext(ActionsContext) as IActionsContextValue;
   return (
     <>
       <Typography variant="h4">Todos Demo</Typography>
       <EditForm />
-      <Filters onChange={actions.getList} />
+      <Filters onChange={todoActions.getList} />
       <List />
     </>
   );

@@ -5,7 +5,6 @@ todo:
 * поискать useStore, чтобы вручную import контекста не передавать постоянно. Все сторы хранить в одном контексте 
 -(не надо) create [store, actions] useStoreActions(StoreType, ActionType) {useMemo[] stores[hashTypeName], actions[hashTypeName] }.
 
-* rename Actions to SideEffects (also in image)
 * preventDefault or prevent default
 
 * create copy of master branch
