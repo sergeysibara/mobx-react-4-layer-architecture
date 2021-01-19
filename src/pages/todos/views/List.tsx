@@ -9,7 +9,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import { observer } from "mobx-react-lite";
 import { ITodoModel } from "../store";
-import { ActionsContext, IActionsContextValue, IStoresContextValue, StoresContext } from "App";
+import { IActionsContextValue, IStoresContextValue, ActionsContext, StoresContext } from "contexts";
 
 const TodoList = observer( () => {
   const { todoStore } = useContext(StoresContext) as IStoresContextValue;

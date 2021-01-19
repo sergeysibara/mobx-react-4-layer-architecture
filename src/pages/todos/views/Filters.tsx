@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Button from "@material-ui/core/Button";
 import { observer } from "mobx-react-lite";
 import Typography from "@material-ui/core/Typography";
-import { ActionsContext, IActionsContextValue, IStoresContextValue, StoresContext } from "../../../App";
+import { IActionsContextValue, IStoresContextValue, ActionsContext, StoresContext } from "contexts";
 
 type MouseEventHandlerType = (e: React.MouseEvent, additionalParam: string) => void;
 

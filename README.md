@@ -1,8 +1,8 @@
 todo:
-* after test try replace getInstance to class { static getInstance}
+* for API use createTodoAPI
 
-* add Jest test for component and for action
-* поискать useStore, чтобы вручную import контекста не передавать постоянно. Все сторы хранить в одном контексте 
+* add Jest test for action. in action test use api mock (jest .fn) 
+* 
 -(не надо) create [store, actions] useStoreActions(StoreType, ActionType) {useMemo[] stores[hashTypeName], actions[hashTypeName] }.
 
 * preventDefault or prevent default

@@ -3,9 +3,12 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import TodoList from '../List';
 import { createTodoStore } from "../../store";
-import { StoresContext, ActionsContext } from "App";
+import { StoresContext, ActionsContext } from "contexts";
 import { createTodoActions } from "../../actions";
 import { createTodoSearchParamsStore } from "../../searchParamsStore";
+
+import initStylesAndConfig from "initStylesAndConfig";
+initStylesAndConfig();
 
 const TEST_LI_TEXT = 'testTodoItem1';
 
