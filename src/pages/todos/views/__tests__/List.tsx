@@ -8,6 +8,7 @@ import { createTodoActions } from "../../actions";
 import { createTodoSearchParamsStore } from "../../searchParamsStore";
 
 import initStylesAndConfig from "initStylesAndConfig";
+import { createTodoAPI } from "../../api";
 initStylesAndConfig();
 
 const TEST_LI_TEXT = 'testTodoItem1';
@@ -26,7 +27,7 @@ const stores = {
   todoSearchParamsStore: createTodoSearchParamsStore()
 };
 
-const todoActions = createTodoActions(stores.todoStore, createTodoSearchParamsStore() );
+const todoActions = createTodoActions(stores.todoStore, createTodoSearchParamsStore(), createTodoAPI());
 
 const actions = {
   todoActions: todoActions,

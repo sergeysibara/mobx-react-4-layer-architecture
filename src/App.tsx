@@ -6,6 +6,7 @@ import { createTodoStore} from "./pages/todos/store"
 import { createTodoSearchParamsStore } from "./pages/todos/searchParamsStore";
 import { createTodoActions } from "./pages/todos/actions";
 import { IActionsContextValue, IStoresContextValue, StoresContext, ActionsContext } from "./contexts";
+import { createTodoAPI } from "./pages/todos/api";
 
 initStylesAndConfig();
 
@@ -15,7 +16,7 @@ export const stores: IStoresContextValue = {
 };
 
 export const actions: IActionsContextValue = {
-  todoActions: createTodoActions(stores.todoStore, stores.todoSearchParamsStore),
+  todoActions: createTodoActions(stores.todoStore, stores.todoSearchParamsStore, createTodoAPI()),
 };
 
 const App = () => {

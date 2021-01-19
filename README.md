@@ -1,7 +1,5 @@
 todo:
-* for API use createTodoAPI
-
-* add Jest test for action. in action test use api mock (jest .fn) 
+* add Jest test for action. in action test use api mock (jest .fn and return mock data - https://jestjs.io/docs/ru/manual-mocks#mocking-user-modules) 
 * 
 -(не надо) create [store, actions] useStoreActions(StoreType, ActionType) {useMemo[] stores[hashTypeName], actions[hashTypeName] }.
 

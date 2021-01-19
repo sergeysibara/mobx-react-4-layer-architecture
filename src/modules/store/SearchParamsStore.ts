@@ -1,28 +1,22 @@
 import { observable, action, makeObservable, toJS } from "mobx";
 import ObjectType from "../types/ObjectType";
-// import { IEditState, IListState, IFiltersState, FilterStateType, SortingStateType, PagingStateType } from "./types";
 
+// format description - https://github.com/typicode/json-server#filter
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IFiltersState extends Record<string, unknown> { }
 
-// export type FilterStateType = Record<string, unknown>;
-
+// format description - https://github.com/typicode/json-server#paginate
 export type PagingStateType = {
   _start?: number; // offset
   _page?: number; // pageNumber
   _limit?: number; // pageSize
 }
 
+// format description - https://github.com/typicode/json-server#sort
 export type SortingStateType = {
   _sort?: string;
   _order?: string;
 }
-
-// export type ISearchParamsState<T extends IFiltersState> = {
-//   filters: T,
-//   sorting: SortingStateType,
-//   paging: PagingStateType,
-// }
 
 /**
  * Base class for filter stores.

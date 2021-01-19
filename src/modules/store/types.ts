@@ -10,25 +10,6 @@ export interface IListState<TListItem extends IIdentifiable> {
   error?: ErrorType;
 }
 
-
-// export interface ISearchParamsState<T extends FilterType> {
-//   // https://github.com/typicode/json-server#filter
-//   filters?: FilterType;
-//
-//   // https://github.com/typicode/json-server#sort
-//   sorting?:  {
-//     _sort?: string;
-//     _order?: string;
-//   };
-//
-//   // https://github.com/typicode/json-server#paginate
-//   paging?: {
-//     _start?: number; // offset
-//     _page?: number; // pageNumber
-//     _limit?: number; // pageSize
-//   };
-// }
-
 export interface IEditState<TEditModel extends IIdentifiable> {
   model?: TEditModel;
   isLoading?: boolean;
