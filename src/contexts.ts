@@ -1,8 +1,7 @@
-//todo do not use in tests
 import { createContext } from "react";
 import BaseActions from "./modules/actions/BaseActions";
-import { TodoStoreType } from "./pages/todos/store";
-import { TodoSearchParamsStoreType } from "./pages/todos/searchParamsStore";
+
+import { TodoSearchParamsStoreType, TodoStoreType } from "./pages/todos/stores";
 
 export interface IStoresContextValue {
   todoStore: TodoStoreType

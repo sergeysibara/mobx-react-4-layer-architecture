@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import useInputBind from "components/controls/useInputBind";
 import { observer } from "mobx-react-lite";
-import { ITodoModel } from "../store";
-import { IActionsContextValue, IStoresContextValue, ActionsContext, StoresContext } from "contexts";
+import { IActionsContextValue, IStoresContextValue, ActionsContext, StoresContext} from "contexts";
+import { ITodoModel } from "../stores";
 
 const TodoForm = observer(() => {
     const { todoStore } = useContext(StoresContext) as IStoresContextValue;

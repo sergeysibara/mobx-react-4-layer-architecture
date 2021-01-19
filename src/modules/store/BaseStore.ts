@@ -74,3 +74,8 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
 }
 
 export type BaseStoreType = BaseStore<IIdentifiable, IIdentifiable>;
+
+// for using in app and in tests
+export const createBaseStore =
+  <TListItem extends IIdentifiable, TEditModel extends IIdentifiable>() =>
+    (new BaseStore<TListItem, TEditModel>());

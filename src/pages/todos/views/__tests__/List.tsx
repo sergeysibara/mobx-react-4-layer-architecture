@@ -2,18 +2,19 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import TodoList from '../List';
-import { createTodoStore } from "../../store";
+import { createBaseStore } from "modules/store/BaseStore";
 import { StoresContext, ActionsContext } from "contexts";
-import { createTodoActions } from "../../actions";
-import { createTodoSearchParamsStore } from "../../searchParamsStore";
+import { ITodoModel } from "../../stores";
+import { createBaseActions } from "modules/actions/BaseActions";
+import { createSearchParamsStore } from "modules/store/SearchParamsStore";
+import { createTodoAPI } from "../../api";
 
 import initStylesAndConfig from "initStylesAndConfig";
-import { createTodoAPI } from "../../api";
 initStylesAndConfig();
 
 const TEST_LI_TEXT = 'testTodoItem1';
 
-const todoStore = createTodoStore();
+const todoStore = createBaseStore<ITodoModel, ITodoModel>();
 todoStore.setListState({
   results: [
     { id: 1, title: TEST_LI_TEXT, completed: false },
@@ -24,10 +25,10 @@ todoStore.setListState({
 
 const stores = {
   todoStore: todoStore,
-  todoSearchParamsStore: createTodoSearchParamsStore()
+  todoSearchParamsStore: createSearchParamsStore()
 };
 
-const todoActions = createTodoActions(stores.todoStore, createTodoSearchParamsStore(), createTodoAPI());
+const todoActions = createBaseActions(stores.todoStore, stores.todoSearchParamsStore, createTodoAPI());
 
 const actions = {
   todoActions: todoActions,

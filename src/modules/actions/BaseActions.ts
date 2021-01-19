@@ -91,7 +91,6 @@ export default class BaseActions {
     // }
   };
 
-  // todo check observable clearing
   clearEditState = (): void => {
     this.mainStore.clearEditState();
   };
@@ -110,3 +109,9 @@ export default class BaseActions {
     this.searchParamsStore.setFilters(filters);
   };
 }
+
+// for using in app and in tests
+export const createBaseActions = (todoStore: BaseStoreType, todoSearchParamsStore: SearchParamsStoreType, api: BaseApiType) => {
+  return new BaseActions(todoStore, todoSearchParamsStore, api);
+};
+

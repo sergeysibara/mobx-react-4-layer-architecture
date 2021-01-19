@@ -72,3 +72,6 @@ export default class SearchParamsStore<T extends IFiltersState> {
 }
 
 export type SearchParamsStoreType = SearchParamsStore<IFiltersState>;
+
+// for using in app and in tests
+export const createSearchParamsStore = <T extends IFiltersState>() => ( new SearchParamsStore<T>());
