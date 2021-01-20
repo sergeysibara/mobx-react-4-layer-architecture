@@ -34,7 +34,7 @@ const TodoList = observer( () => {
             }}
             checked={item.completed || false}
             onClick={e => {
-              e.stopPropagation(); // preventDefault
+              e.preventDefault();
             }}
           />
           <ListItemText primary={item.title} />
@@ -42,7 +42,7 @@ const TodoList = observer( () => {
             <IconButton
               aria-label="Edit"
               onClick={e => {
-                e.stopPropagation(); // preventDefault
+                e.preventDefault();
                 todoActions.getOne(item.id);
               }}
             >
@@ -51,7 +51,7 @@ const TodoList = observer( () => {
             <IconButton
               aria-label="Delete"
               onClick={e => {
-                e.stopPropagation(); // preventDefault
+                e.preventDefault();
                 todoActions.delete(item.id);
               }}
             >

@@ -1,12 +1,7 @@
 todo:
-* add Jest test for action. in action test use api mock (jest .fn and return mock data - https://jestjs.io/docs/ru/manual-mocks#mocking-user-modules) 
-* 
--(не надо) create [store, actions] useStoreActions(StoreType, ActionType) {useMemo[] stores[hashTypeName], actions[hashTypeName] }.
-
-* preventDefault or prevent default
-
 * create copy of master branch
 * merge it to master branch 
+
 ## Description
  
 ![](content/schemes.png)
@@ -27,7 +22,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### `yarn test` (tests is not added)
+### `yarn test`
 
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.

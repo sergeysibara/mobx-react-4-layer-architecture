@@ -1,14 +1,11 @@
 import React from 'react';
 import TodoPage from "./pages/todos/views/Page";
 import { ToastContainer } from 'react-toastify';
-import initStylesAndConfig from "initStylesAndConfig";
 import { createBaseStore} from "modules/store/BaseStore"
 import { createSearchParamsStore } from "modules/store/SearchParamsStore";
 import { createBaseActions } from "modules/actions/BaseActions";
 import { IActionsContextValue, IStoresContextValue, StoresContext, ActionsContext } from "./contexts";
 import { createTodoAPI } from "./pages/todos/api";
-
-initStylesAndConfig();
 
 export const stores: IStoresContextValue = {
   todoStore: createBaseStore(),
