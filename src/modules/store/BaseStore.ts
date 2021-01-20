@@ -36,27 +36,27 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
   }
 
   @action
-  setListState(list: IListState<TListItem>): void {
+  setListState(list: IListState<TListItem>) {
     this.listState = list;
   }
 
   @action
-  addToList(item: TListItem): void  {
+  addToList(item: TListItem) {
     this.list.push(item);
   }
 
   @action
-  setEditState(editState: IEditState<TEditModel>): void  {
+  setEditState(editState: IEditState<TEditModel>) {
     this.editState = editState;
   }
 
   @action
-  clearEditState(): void  {
+  clearEditState() {
     this.editState = {};
   }
 
   @action
-  updateListItem(item: TListItem): void  {
+  updateListItem(item: TListItem) {
     const foundTodo = this.list.find(i => item && i.id === item.id);
     if (foundTodo && item) {
       Object.assign(foundTodo, item);
@@ -64,7 +64,7 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
   }
 
   @action
-  deleteFromList(id: number): void  {
+  deleteFromList(id: number) {
     const foundIndex = this.list.findIndex(i => i.id === id);
     if (foundIndex !== -1) {
       this.list.splice(foundIndex, 1);

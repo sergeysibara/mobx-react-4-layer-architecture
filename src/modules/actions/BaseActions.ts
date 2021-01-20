@@ -36,7 +36,7 @@ export default class BaseActions {
     this._api = api;
   }
 
-  getOne = async (id: number): Promise<void> => {
+  getOne = async (id: number) => {
     this.mainStore.clearEditState();
     const response = await this.api.getOne(id);
     if (isIResponseError(response)) {
@@ -47,7 +47,7 @@ export default class BaseActions {
     }
   };
 
-  getList = async (): Promise<void> => {
+  getList = async () => {
     const searchParams = this._searchParamsStore.getSearchParamsMergedToJS();
     const response = await this.api.getList(searchParams);
     if (isIResponseError(response)) {
@@ -59,10 +59,9 @@ export default class BaseActions {
         count: response.count
       });
     }
-
   };
 
-  create = async (modelData: ObjectType): Promise<void> => {
+  create = async (modelData: ObjectType) => {
     const response = await this.api.create(modelData);
     if (isIResponseError(response)) {
       toast.error(response.message);
@@ -77,7 +76,7 @@ export default class BaseActions {
     // }
   };
 
-  update = async (model: IIdentifiable): Promise<void> => {
+  update = async (model: IIdentifiable) => {
     const response = await this.api.update(model);
     if (isIResponseError(response)) {
       toast.error(response.message);
@@ -91,11 +90,11 @@ export default class BaseActions {
     // }
   };
 
-  clearEditState = (): void => {
+  clearEditState = () => {
     this.mainStore.clearEditState();
   };
 
-  delete = async (id: number): Promise<void> => {
+  delete = async (id: number) => {
     const response = await this.api.delete(id);
     if (isIResponseError(response)) {
       toast.error(response.message);
@@ -105,7 +104,7 @@ export default class BaseActions {
     }
   };
 
-  setFilters = (filters: ObjectType): void => {
+  setFilters = (filters: ObjectType) => {
     this.searchParamsStore.setFilters(filters);
   };
 }
