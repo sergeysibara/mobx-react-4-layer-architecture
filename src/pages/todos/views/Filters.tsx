@@ -3,27 +3,36 @@ import Button from "@material-ui/core/Button";
 import { observer } from "mobx-react-lite";
 import Typography from "@material-ui/core/Typography";
 import { IActionsContextValue, IStoresContextValue, ActionsContext, StoresContext } from "contexts";
+import { makeStyles } from '@material-ui/core/styles';
 
 type MouseEventHandlerType = (e: React.MouseEvent, additionalParam: string) => void;
+
+const useStyles = makeStyles({
+  root: {
+    marginLeft: "1rem",
+  }
+});
 
 const FilterButton = observer<{
   children: React.ReactNode;
   completed?: boolean;
   onClick: MouseEventHandlerType; //or Function;
 }>(({ children, completed, onClick, ...props }) => {
-  const { todoSearchParamsStore } = useContext(StoresContext) as IStoresContextValue;
-  const { todoActions } = useContext(ActionsContext) as IActionsContextValue;
+    const { todoSearchParamsStore } = useContext(StoresContext) as IStoresContextValue;
+    const { todoActions } = useContext(ActionsContext) as IActionsContextValue;
+
+    const classes = useStyles();
 
     const visibilityFilter = todoSearchParamsStore.getFilters().completed;
     return (
       <Button
         variant="contained"
-        style={{ marginLeft: "1rem" }}
+        classes={classes}
         disabled={visibilityFilter === completed}
         onClick={e => {
           todoActions.setFilters({ completed });
           if (onClick) {
-            onClick(e, completed ? completed.toString(): "" );
+            onClick(e, completed ? completed.toString() : "");
           }
         }}
         {...props}

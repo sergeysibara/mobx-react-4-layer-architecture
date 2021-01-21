@@ -6,10 +6,10 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import TodoList from '../List';
-import { createBaseStore } from "modules/store/BaseStore";
+import { createBaseStore } from "core/store/BaseStore";
 import { StoresContext, ActionsContext } from "contexts";
 import { ITodoModel } from "../../stores";
-import { createSearchParamsStore } from "modules/store/SearchParamsStore";
+import { createSearchParamsStore } from "core/store/SearchParamsStore";
 
 const TEST_LI_TEXT = 'testTodoItem1';
 const mockListData = {

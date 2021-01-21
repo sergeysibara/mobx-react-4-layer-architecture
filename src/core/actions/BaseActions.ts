@@ -1,17 +1,14 @@
-import { BaseStoreType } from "modules/store/BaseStore";
-import { SearchParamsStoreType } from "modules/store/SearchParamsStore";
-import { BaseApiType } from "modules/api/BaseApi";
-import IIdentifiable from "modules/types/IIdentifiable";
-import ObjectType from "modules/types/ObjectType";
-import { isIResponseError } from "modules/api/types";
+import { BaseStoreType } from "core/store/BaseStore";
+import { SearchParamsStoreType } from "core/store/SearchParamsStore";
+import { BaseApiType } from "core/api/BaseApi";
+import IIdentifiable from "core/types/IIdentifiable";
+import ObjectType from "core/types/ObjectType";
+import { isIResponseError } from "core/api/types";
 import { toast } from 'react-toastify';
 
 /**
  * Base class for action group.
- * Actions - it is middleware in this examples. Used for all api, update stores, other middleware logic.
- *
- * It is not required for all action groups to use BaseActions or BaseActions child class! For specific action groups
- * can to use custom actions class.
+ * Actions - it is side effects in this example. Used for call api, update stores, other business logic.
  */
 export default class BaseActions {
   private readonly _mainStore: BaseStoreType;

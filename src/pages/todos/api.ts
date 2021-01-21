@@ -1,5 +1,5 @@
-import BaseApi from "modules/api/BaseApi";
-import IIdentifiable from "modules/types/IIdentifiable";
+import BaseApi from "core/api/BaseApi";
+import IIdentifiable from "core/types/IIdentifiable";
 
 export interface ITodoApiModel extends IIdentifiable {
   title: string;

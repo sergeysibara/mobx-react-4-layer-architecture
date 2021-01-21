@@ -1,4 +1,4 @@
-import IIdentifiable from "modules/types/IIdentifiable";
+import IIdentifiable from "core/types/IIdentifiable";
 import ObjectType from "../types/ObjectType";
 
 // todo remove it

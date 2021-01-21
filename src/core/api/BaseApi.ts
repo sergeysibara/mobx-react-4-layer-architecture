@@ -5,8 +5,8 @@ import {
   DeleteResponse,
   IResponseError
 } from "./types";
-import IIdentifiable from "modules/types/IIdentifiable";
-import ObjectType from "modules/types/ObjectType";
+import IIdentifiable from "core/types/IIdentifiable";
+import ObjectType from "core/types/ObjectType";
 
 export default class BaseApi<T extends IIdentifiable> {
   private readonly _apiUrl: string;

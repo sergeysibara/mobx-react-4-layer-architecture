@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import BaseActions from "./modules/actions/BaseActions";
+import BaseActions from "./core/actions/BaseActions";
 
 import { TodoSearchParamsStoreType, TodoStoreType } from "./pages/todos/stores";
 

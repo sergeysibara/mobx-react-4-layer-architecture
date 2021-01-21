@@ -1,6 +1,6 @@
-import IIdentifiable from "modules/types/IIdentifiable";
-import BaseStore from "modules/store/BaseStore";
-import SearchParamsStore, { IFiltersState } from "modules/store/SearchParamsStore";
+import IIdentifiable from "core/types/IIdentifiable";
+import BaseStore from "core/store/BaseStore";
+import SearchParamsStore, { IFiltersState } from "core/store/SearchParamsStore";
 
 export interface ITodoModel extends IIdentifiable {
   title: string;

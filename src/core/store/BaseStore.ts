@@ -1,17 +1,9 @@
 import { observable, action, makeObservable } from "mobx";
 import { IEditState, IListState } from "./types";
-import IIdentifiable from "modules/types/IIdentifiable";
+import IIdentifiable from "core/types/IIdentifiable";
 
 /**
  * Base class for stores.
- *
- * It is not required for all stores to use BaseStore or BaseStore child class! For specific stores can
- * use custom store class.
- *
- * Notes:
- * * You can use multiple small stores instead store with multiple states (list, searchParams, edit):
- *   BaseListStore, SearchParamsStore, BaseEditStore.
- * * You can use constructor function factory function or objects instead classes.
  */
 export default class BaseStore<TListItem extends IIdentifiable, TEditModel extends IIdentifiable> {
   @observable

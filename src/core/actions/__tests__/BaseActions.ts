@@ -12,7 +12,7 @@ describe('Todo actions', () => {
   describe('Update', () => {
     test('should update item in store', async () => {
       expect.assertions(3);
-      const testItem = {id:1, value: 'testValue'} as IIdentifiable;
+      const testItem = { id: 1, value: 'testValue' } as IIdentifiable;
 
       const mockedApi = {
         update: jest.fn(async (modelData) => {

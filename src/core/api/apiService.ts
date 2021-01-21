@@ -1,4 +1,4 @@
-import ObjectType from "modules/types/ObjectType";
+import ObjectType from "core/types/ObjectType";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_API_URL;
