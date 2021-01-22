@@ -1,9 +1,9 @@
-import { BaseStoreType } from "core/store/BaseStore";
-import { SearchParamsStoreType } from "core/store/SearchParamsStore";
-import { BaseApiType } from "core/api/BaseApi";
-import IIdentifiable from "core/types/IIdentifiable";
-import ObjectType from "core/types/ObjectType";
-import { isIResponseError } from "core/api/types";
+import { BaseStoreType } from 'core/store/BaseStore';
+import { SearchParamsStoreType } from 'core/store/SearchParamsStore';
+import { BaseApiType } from 'core/api/BaseApi';
+import IIdentifiable from 'core/types/IIdentifiable';
+import ObjectType from 'core/types/ObjectType';
+import { isIResponseError } from 'core/api/types';
 import { toast } from 'react-toastify';
 
 /**
@@ -16,7 +16,7 @@ export default class BaseActions {
   private readonly _api: BaseApiType;
 
   get mainStore(): BaseStoreType {
-      return this._mainStore;
+    return this._mainStore;
   }
 
   get searchParamsStore(): SearchParamsStoreType {
@@ -38,8 +38,7 @@ export default class BaseActions {
     const response = await this.api.getOne(id);
     if (isIResponseError(response)) {
       toast.error(response.message);
-    }
-    else {
+    } else {
       this.mainStore.setEditState({ model: response.model });
     }
   };
@@ -49,11 +48,10 @@ export default class BaseActions {
     const response = await this.api.getList(searchParams);
     if (isIResponseError(response)) {
       toast.error(response.message);
-    }
-    else {
+    } else {
       this.mainStore.setListState({
         results: response.results,
-        count: response.count
+        count: response.count,
       });
     }
   };
@@ -62,8 +60,7 @@ export default class BaseActions {
     const response = await this.api.create(modelData);
     if (isIResponseError(response)) {
       toast.error(response.message);
-    }
-    else {
+    } else {
       // await this.getList(); // for apply filters
       this.mainStore.addToList(response.model);
     }
@@ -77,8 +74,7 @@ export default class BaseActions {
     const response = await this.api.update(model);
     if (isIResponseError(response)) {
       toast.error(response.message);
-    }
-    else {
+    } else {
       this.mainStore.updateListItem(response.model);
     }
     // if (response) {
@@ -95,8 +91,7 @@ export default class BaseActions {
     const response = await this.api.delete(id);
     if (isIResponseError(response)) {
       toast.error(response.message);
-    }
-    else {
+    } else {
       this.mainStore.deleteFromList(id);
     }
   };
@@ -107,7 +102,10 @@ export default class BaseActions {
 }
 
 // for using in app and in tests
-export const createBaseActions = (todoStore: BaseStoreType, todoSearchParamsStore: SearchParamsStoreType, api: BaseApiType) => {
+export const createBaseActions = (
+  todoStore: BaseStoreType,
+  todoSearchParamsStore: SearchParamsStoreType,
+  api: BaseApiType,
+) => {
   return new BaseActions(todoStore, todoSearchParamsStore, api);
 };
-

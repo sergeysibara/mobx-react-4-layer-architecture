@@ -1,6 +1,6 @@
-import IIdentifiable from "core/types/IIdentifiable";
-import BaseStore from "core/store/BaseStore";
-import SearchParamsStore, { IFiltersState } from "core/store/SearchParamsStore";
+import IIdentifiable from 'core/types/IIdentifiable';
+import BaseStore from 'core/store/BaseStore';
+import SearchParamsStore, { IFiltersState } from 'core/store/SearchParamsStore';
 
 export interface ITodoModel extends IIdentifiable {
   title: string;
@@ -8,7 +8,6 @@ export interface ITodoModel extends IIdentifiable {
 }
 
 export type TodoStoreType = BaseStore<ITodoModel, ITodoModel>;
-
 
 export interface ITodoFiltersState extends IFiltersState {
   completed?: boolean;

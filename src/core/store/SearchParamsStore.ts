@@ -1,45 +1,44 @@
-import { observable, action, makeObservable, toJS } from "mobx";
-import ObjectType from "../types/ObjectType";
+import { observable, action, makeObservable, toJS } from 'mobx';
+import ObjectType from '../types/ObjectType';
 
 // Format description - https://github.com/typicode/json-server#filter
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IFiltersState extends Record<string, unknown> { }
+export interface IFiltersState extends Record<string, unknown> {}
 
 // Format description - https://github.com/typicode/json-server#paginate
 export type PagingStateType = {
   _start?: number; // offset
   _page?: number; // pageNumber
   _limit?: number; // pageSize
-}
+};
 
 // Format description - https://github.com/typicode/json-server#sort
 export type SortingStateType = {
   _sort?: string;
   _order?: string;
-}
+};
 
 /**
  * Base class for stores with search params (sorting, paging, filtration).
  */
 export default class SearchParamsStore<T extends IFiltersState> {
   @observable
-  protected filtersState: T = {
-  } as T;
+  protected filtersState: T = {} as T;
 
   @observable
   protected pagingState: PagingStateType = {
-    _limit: 10
+    _limit: 10,
   };
 
   @observable
   protected sortingState: SortingStateType = {
-    _sort: "title",
-    _order: "asc"
+    _sort: 'title',
+    _order: 'asc',
   };
 
   constructor(filters?: T, paging?: PagingStateType, sorting?: SortingStateType) {
     makeObservable(this);
-    if (filters){
+    if (filters) {
       this.filtersState = filters;
     }
 
@@ -63,9 +62,8 @@ export default class SearchParamsStore<T extends IFiltersState> {
   @action
   setFilters(filters: ObjectType, merge = true) {
     if (merge) {
-      this.filtersState = { ...this.filtersState, ...filters};
-    }
-    else  {
+      this.filtersState = { ...this.filtersState, ...filters };
+    } else {
       this.filtersState = filters as T;
     }
   }
@@ -74,4 +72,4 @@ export default class SearchParamsStore<T extends IFiltersState> {
 export type SearchParamsStoreType = SearchParamsStore<IFiltersState>;
 
 // for using in app and in tests
-export const createSearchParamsStore = <T extends IFiltersState>() => ( new SearchParamsStore<T>());
+export const createSearchParamsStore = <T extends IFiltersState>() => new SearchParamsStore<T>();

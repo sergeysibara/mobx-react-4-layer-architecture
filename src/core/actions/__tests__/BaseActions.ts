@@ -2,11 +2,11 @@
  * Demonstration that actions can be tested
  */
 
-import {createBaseActions} from '../BaseActions';
-import { BaseStoreType } from "../../store/BaseStore";
-import { SearchParamsStoreType } from "../../store/SearchParamsStore";
-import { BaseApiType } from "../../api/BaseApi";
-import IIdentifiable from "../../types/IIdentifiable";
+import { createBaseActions } from '../BaseActions';
+import { BaseStoreType } from '../../store/BaseStore';
+import { SearchParamsStoreType } from '../../store/SearchParamsStore';
+import { BaseApiType } from '../../api/BaseApi';
+import IIdentifiable from '../../types/IIdentifiable';
 
 describe('Todo actions', () => {
   describe('Update', () => {
@@ -17,21 +17,21 @@ describe('Todo actions', () => {
       const mockedApi = {
         update: jest.fn(async (modelData) => {
           return {
-            model: modelData
-          }
-        })
+            model: modelData,
+          };
+        }),
       };
 
       const mockedStore = {
-        updateListItem: jest.fn( (newItem) => {
+        updateListItem: jest.fn((newItem) => {
           expect(newItem).toEqual(testItem);
-        })
+        }),
       };
 
       const actions = createBaseActions(
-        mockedStore as unknown as BaseStoreType,
-        {} as unknown as SearchParamsStoreType,
-        mockedApi as unknown as BaseApiType
+        (mockedStore as unknown) as BaseStoreType,
+        ({} as unknown) as SearchParamsStoreType,
+        (mockedApi as unknown) as BaseApiType,
       );
 
       await actions.update(testItem);
@@ -39,5 +39,4 @@ describe('Todo actions', () => {
       expect(mockedStore.updateListItem.mock.calls.length).toBe(1);
     });
   });
-
 });

@@ -1,6 +1,6 @@
-import { observable, action, makeObservable } from "mobx";
-import { IEditState, IListState } from "./types";
-import IIdentifiable from "core/types/IIdentifiable";
+import { observable, action, makeObservable } from 'mobx';
+import { IEditState, IListState } from './types';
+import IIdentifiable from 'core/types/IIdentifiable';
 
 /**
  * Base class for stores.
@@ -8,12 +8,11 @@ import IIdentifiable from "core/types/IIdentifiable";
 export default class BaseStore<TListItem extends IIdentifiable, TEditModel extends IIdentifiable> {
   @observable
   protected listState: IListState<TListItem> = {
-    results: []
+    results: [],
   };
 
   @observable
-  protected editState: IEditState<TEditModel> = {
-  };
+  protected editState: IEditState<TEditModel> = {};
 
   constructor() {
     makeObservable<BaseStore<TListItem, TEditModel>>(this);
@@ -49,7 +48,7 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
 
   @action
   updateListItem(item: TListItem) {
-    const foundTodo = this.list.find(i => item && i.id === item.id);
+    const foundTodo = this.list.find((i) => item && i.id === item.id);
     if (foundTodo && item) {
       Object.assign(foundTodo, item);
     }
@@ -57,17 +56,15 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
 
   @action
   deleteFromList(id: number) {
-    const foundIndex = this.list.findIndex(i => i.id === id);
+    const foundIndex = this.list.findIndex((i) => i.id === id);
     if (foundIndex !== -1) {
       this.list.splice(foundIndex, 1);
     }
   }
-
 }
 
 export type BaseStoreType = BaseStore<IIdentifiable, IIdentifiable>;
 
 // for using in app and in tests
-export const createBaseStore =
-  <TListItem extends IIdentifiable, TEditModel extends IIdentifiable>() =>
-    (new BaseStore<TListItem, TEditModel>());
+export const createBaseStore = <TListItem extends IIdentifiable, TEditModel extends IIdentifiable>() =>
+  new BaseStore<TListItem, TEditModel>();

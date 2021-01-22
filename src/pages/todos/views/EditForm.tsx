@@ -1,20 +1,18 @@
-import React, { useContext, useEffect } from "react";
-import TextField from "@material-ui/core/TextField";
-import useInputBind from "components/controls/useInputBind";
-import { observer } from "mobx-react-lite";
-import { IActionsContextValue, IStoresContextValue, ActionsContext, StoresContext} from "contexts";
-import { ITodoModel } from "../stores";
+import React, { useContext, useEffect } from 'react';
+import TextField from '@material-ui/core/TextField';
+import useInputBind from 'components/controls/useInputBind';
+import { observer } from 'mobx-react-lite';
+import { IActionsContextValue, IStoresContextValue, ActionsContext, StoresContext } from 'contexts';
+import { ITodoModel } from '../stores';
 
 const TodoForm = observer(() => {
-    const { todoStore } = useContext(StoresContext) as IStoresContextValue;
-    const { todoActions } = useContext(ActionsContext) as IActionsContextValue;
+  const { todoStore } = useContext(StoresContext) as IStoresContextValue;
+  const { todoActions } = useContext(ActionsContext) as IActionsContextValue;
 
   const todoModel = todoStore?.editModel;
   const isNew = !todoModel;
 
-  const [todoText, setTodoText, todoTextBind] = useInputBind(
-    todoModel ? todoModel.title : ""
-  );
+  const [todoText, setTodoText, todoTextBind] = useInputBind(todoModel ? todoModel.title : '');
 
   useEffect(() => {
     if (todoModel) {
@@ -22,7 +20,7 @@ const TodoForm = observer(() => {
     }
   }, [todoModel, setTodoText]);
 
-  const saveTodo = todoText => {
+  const saveTodo = (todoText) => {
     const trimmedText = todoText.trim();
 
     if (trimmedText.length > 0) {
@@ -35,18 +33,18 @@ const TodoForm = observer(() => {
     }
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     saveTodo(todoText);
-    setTodoText("");
+    setTodoText('');
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <TextField
         variant="outlined"
-        placeholder={`${isNew ? "add" : "edit"} todo`}
-        label={`Press Enter for ${isNew ? "add" : "edit"} todo`}
+        placeholder={`${isNew ? 'add' : 'edit'} todo`}
+        label={`Press Enter for ${isNew ? 'add' : 'edit'} todo`}
         margin="normal"
         {...todoTextBind}
       />

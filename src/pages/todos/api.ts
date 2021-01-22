@@ -1,5 +1,5 @@
-import BaseApi from "core/api/BaseApi";
-import IIdentifiable from "core/types/IIdentifiable";
+import BaseApi from 'core/api/BaseApi';
+import IIdentifiable from 'core/types/IIdentifiable';
 
 export interface ITodoApiModel extends IIdentifiable {
   title: string;
@@ -8,5 +8,5 @@ export interface ITodoApiModel extends IIdentifiable {
 
 // for using in app and in tests
 export const createTodoAPI = () => {
-  return new BaseApi<ITodoApiModel>("/todos");
+  return new BaseApi<ITodoApiModel>('/todos');
 };

@@ -1,15 +1,15 @@
-import { createContext } from "react";
-import BaseActions from "./core/actions/BaseActions";
+import { createContext } from 'react';
+import BaseActions from './core/actions/BaseActions';
 
-import { TodoSearchParamsStoreType, TodoStoreType } from "./pages/todos/stores";
+import { TodoSearchParamsStoreType, TodoStoreType } from './pages/todos/stores';
 
 export interface IStoresContextValue {
-  todoStore: TodoStoreType
-  todoSearchParamsStore: TodoSearchParamsStoreType
+  todoStore: TodoStoreType;
+  todoSearchParamsStore: TodoSearchParamsStoreType;
 }
 
 export interface IActionsContextValue {
-  todoActions: BaseActions
+  todoActions: BaseActions;
 }
 
 export const StoresContext = createContext<IStoresContextValue | unknown>(undefined);

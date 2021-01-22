@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
-import Button from "@material-ui/core/Button";
-import { observer } from "mobx-react-lite";
-import Typography from "@material-ui/core/Typography";
-import { IActionsContextValue, IStoresContextValue, ActionsContext, StoresContext } from "contexts";
+import React, { useContext } from 'react';
+import Button from '@material-ui/core/Button';
+import { observer } from 'mobx-react-lite';
+import Typography from '@material-ui/core/Typography';
+import { IActionsContextValue, IStoresContextValue, ActionsContext, StoresContext } from 'contexts';
 import { makeStyles } from '@material-ui/core/styles';
 
 type MouseEventHandlerType = (e: React.MouseEvent, additionalParam: string) => void;
 
 const useStyles = makeStyles({
   root: {
-    marginLeft: "1rem",
-  }
+    marginLeft: '1rem',
+  },
 });
 
 const FilterButton = observer<{
@@ -18,40 +18,43 @@ const FilterButton = observer<{
   completed?: boolean;
   onClick: MouseEventHandlerType; //or Function;
 }>(({ children, completed, onClick, ...props }) => {
-    const { todoSearchParamsStore } = useContext(StoresContext) as IStoresContextValue;
-    const { todoActions } = useContext(ActionsContext) as IActionsContextValue;
+  const { todoSearchParamsStore } = useContext(StoresContext) as IStoresContextValue;
+  const { todoActions } = useContext(ActionsContext) as IActionsContextValue;
 
-    const classes = useStyles();
+  const classes = useStyles();
 
-    const visibilityFilter = todoSearchParamsStore.getFilters().completed;
-    return (
-      <Button
-        variant="contained"
-        classes={classes}
-        disabled={visibilityFilter === completed}
-        onClick={e => {
-          todoActions.setFilters({ completed });
-          if (onClick) {
-            onClick(e, completed ? completed.toString() : "");
-          }
-        }}
-        {...props}
-      >
-        {children}
-      </Button>
-    );
-  }
-);
+  const visibilityFilter = todoSearchParamsStore.getFilters().completed;
+  return (
+    <Button
+      variant="contained"
+      classes={classes}
+      disabled={visibilityFilter === completed}
+      onClick={(e) => {
+        todoActions.setFilters({ completed });
+        if (onClick) {
+          onClick(e, completed ? completed.toString() : '');
+        }
+      }}
+      {...props}
+    >
+      {children}
+    </Button>
+  );
+});
 
-const Filters = ({ onChange }: {onChange: MouseEventHandlerType}) => {
+const Filters = ({ onChange }: { onChange: MouseEventHandlerType }) => {
   return (
     <div>
-      <Typography variant="h6" color="secondary">{"A fake server is used - https://jsonplaceholder.typicode.com."}</Typography>
-      <Typography variant="h6" color="secondary">{"Changes are faked and aren't persisted! A changes will not work correctly with the fake server."}</Typography>
-      <Typography variant="h6" color="secondary">{"Changes will be discarded after changing the filter bellow and after repeated updates an item!"}</Typography>
-      <FilterButton onClick={onChange}>
-        All
-      </FilterButton>
+      <Typography variant="h6" color="secondary">
+        {'A fake server is used - https://jsonplaceholder.typicode.com.'}
+      </Typography>
+      <Typography variant="h6" color="secondary">
+        {"Changes are faked and aren't persisted! A changes will not work correctly with the fake server."}
+      </Typography>
+      <Typography variant="h6" color="secondary">
+        {'Changes will be discarded after changing the filter bellow and after repeated updates an item!'}
+      </Typography>
+      <FilterButton onClick={onChange}>All</FilterButton>
       <FilterButton completed={false} onClick={onChange}>
         Active
       </FilterButton>

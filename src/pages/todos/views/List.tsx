@@ -1,17 +1,17 @@
-import React, { useEffect, useContext } from "react";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import Checkbox from "@material-ui/core/Checkbox";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import { observer } from "mobx-react-lite";
-import { IActionsContextValue, IStoresContextValue, ActionsContext, StoresContext } from "contexts";
-import { ITodoModel } from "../stores";
+import React, { useEffect, useContext } from 'react';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import Checkbox from '@material-ui/core/Checkbox';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import { observer } from 'mobx-react-lite';
+import { IActionsContextValue, IStoresContextValue, ActionsContext, StoresContext } from 'contexts';
+import { ITodoModel } from '../stores';
 
-const TodoList = observer( () => {
+const TodoList = observer(() => {
   const { todoStore } = useContext(StoresContext) as IStoresContextValue;
   const { todoActions } = useContext(ActionsContext) as IActionsContextValue;
 
@@ -19,9 +19,9 @@ const TodoList = observer( () => {
     todoActions.update({ id: item.id, completed: !item.completed } as ITodoModel);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     todoActions.getList();
-  },[]);
+  }, []);
   return (
     <List>
       {todoStore.list.map((item) => (
@@ -33,7 +33,7 @@ const TodoList = observer( () => {
               handleChange(item);
             }}
             checked={item.completed || false}
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
             }}
           />
@@ -41,7 +41,7 @@ const TodoList = observer( () => {
           <ListItemSecondaryAction>
             <IconButton
               aria-label="Edit"
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 todoActions.getOne(item.id);
               }}
@@ -50,7 +50,7 @@ const TodoList = observer( () => {
             </IconButton>
             <IconButton
               aria-label="Delete"
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 todoActions.delete(item.id);
               }}

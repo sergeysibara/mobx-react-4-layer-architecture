@@ -1,5 +1,5 @@
-import IIdentifiable from "../types/IIdentifiable";
-import ObjectType from "../types/ObjectType";
+import IIdentifiable from '../types/IIdentifiable';
+import ObjectType from '../types/ObjectType';
 
 export type ErrorType = string | ObjectType;
 

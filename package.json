@@ -7,9 +7,14 @@
     "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
+    "@typescript-eslint/eslint-plugin": "^4.14.0",
+    "@typescript-eslint/parser": "^4.14.0",
     "axios": "^0.21.1",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "mobx": "^6.0.4",
     "mobx-react-lite": "^3.1.6",
+    "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "^4.0.1",
@@ -20,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "eslint": "eslint src/**/*.tsx"
   },
   "eslintConfig": {
     "extends": "react-app"
