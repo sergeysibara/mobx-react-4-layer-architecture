@@ -1,12 +1,3 @@
-import * as Api from "./api";
-import * as MainStore from "./store";
-import BaseActions from "modules/actions/BaseActions";
+// Contains overrided actions for "todos" feature
 
-const api = Api.getInstance();
-const mainStore = MainStore.getInstance();
-
-const todoActions = new BaseActions(mainStore, api);
-
-export const getInstance = () => {
-  return todoActions;
-};
+export {};

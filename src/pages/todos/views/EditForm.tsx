@@ -1,52 +1,50 @@
-import React, { useEffect } from "react";
-import TextField from "@material-ui/core/TextField";
-import useInputBind from "components/controls/useInputBind";
-import { observer } from "mobx-react-lite";
-import * as Actions from "../actions";
-import * as TodoStore from "../store";
-import { TodoModel } from "../store";
-
-const actions = Actions.getInstance();
+import React, { useContext, useEffect } from 'react';
+import TextField from '@material-ui/core/TextField';
+import useInputBind from 'components/controls/useInputBind';
+import { observer } from 'mobx-react-lite';
+import { IActionsContextValue, IStoresContextValue, ActionsContext, StoresContext } from 'contexts';
+import { ITodoModel } from '../stores';
 
 const TodoForm = observer(() => {
-  const todoModel = TodoStore.getInstance().editModel;
+  const { todoStore } = useContext(StoresContext) as IStoresContextValue;
+  const { todoActions } = useContext(ActionsContext) as IActionsContextValue;
+
+  const todoModel = todoStore?.editModel;
   const isNew = !todoModel;
 
-  const [todoText, setTodoText, todoTextBind] = useInputBind(
-    todoModel ? todoModel.text : ""
-  );
+  const [todoText, setTodoText, todoTextBind] = useInputBind(todoModel ? todoModel.title : '');
 
   useEffect(() => {
     if (todoModel) {
-      setTodoText(todoModel.text);
+      setTodoText(todoModel.title);
     }
   }, [todoModel, setTodoText]);
 
-  const saveTodo = todoText => {
+  const saveTodo = (todoText) => {
     const trimmedText = todoText.trim();
 
     if (trimmedText.length > 0) {
       if (todoModel) {
-        actions.update({ ...todoModel, text: trimmedText } as TodoModel);
-        actions.clearEditModule();
+        todoActions.update({ ...todoModel, title: trimmedText } as ITodoModel);
+        todoActions.clearEditState();
       } else {
-        actions.create({ text: trimmedText });
+        todoActions.create({ title: trimmedText });
       }
     }
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     saveTodo(todoText);
-    setTodoText("");
+    setTodoText('');
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <TextField
         variant="outlined"
-        placeholder={`${isNew ? "add" : "edit"} todo`}
-        label={`Press Enter for ${isNew ? "add" : "edit"} todo`}
+        placeholder={`${isNew ? 'add' : 'edit'} todo`}
+        label={`Press Enter for ${isNew ? 'add' : 'edit'} todo`}
         margin="normal"
         {...todoTextBind}
       />

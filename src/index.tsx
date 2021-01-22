@@ -1,16 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TodoPage from "./pages/todos/views/Page";
-
+import App from './App';
+import { configure } from 'mobx';
+import 'react-toastify/dist/ReactToastify.css';
 import './styles.css';
 
-const App = () => {
-  return (
-    <div className="App">
-      <TodoPage />
-    </div>
-  );
-};
+// don't allow state modifications outside actions
+configure({ enforceActions: 'always' });
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
