@@ -1,7 +1,3 @@
-todo:
-* create copy of master branch
-* merge it to master branch 
-
 ## Description
  
 ![](content/schemes.png)
