@@ -1,9 +1,9 @@
-import { BaseStoreType } from 'core/store/BaseStore';
-import { SearchParamsStoreType } from 'core/store/SearchParamsStore';
-import { BaseApiType } from 'core/api/BaseApi';
-import IIdentifiable from 'core/types/IIdentifiable';
-import ObjectType from 'core/types/ObjectType';
-import { isIResponseError } from 'core/api/types';
+import { BaseStoreType } from '../store/BaseStore';
+import { SearchParamsStoreType } from '../store/SearchParamsStore';
+import { BaseApiType } from '../api/BaseApi';
+import IIdentifiable from '../types/IIdentifiable';
+import ObjectType from '../types/ObjectType';
+import { isIResponseError } from '../api/types';
 import { toast } from 'react-toastify';
 
 /**
@@ -64,10 +64,6 @@ export default class BaseActions {
       // await this.getList(); // for apply filters
       this.mainStore.addToList(response.model);
     }
-    // if (response) {
-    //   // await this.getList(); // for apply filters
-    //   this.mainStore.addToList(response as IIdentifiable);
-    // }
   };
 
   update = async (model: IIdentifiable) => {
@@ -76,11 +72,8 @@ export default class BaseActions {
       toast.error(response.message);
     } else {
       this.mainStore.updateListItem(response.model);
+      // await this.getList(); // for apply filters
     }
-    // if (response) {
-    //   // await this.getList(); // for apply filters
-    //   this.mainStore.updateListItem(response as IIdentifiable);
-    // }
   };
 
   clearEditState = () => {
@@ -100,12 +93,3 @@ export default class BaseActions {
     this.searchParamsStore.setFilters(filters);
   };
 }
-
-// for using in app and in tests
-export const createBaseActions = (
-  todoStore: BaseStoreType,
-  todoSearchParamsStore: SearchParamsStoreType,
-  api: BaseApiType,
-) => {
-  return new BaseActions(todoStore, todoSearchParamsStore, api);
-};

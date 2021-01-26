@@ -2,7 +2,7 @@
  * Demonstration that actions can be tested
  */
 
-import { createBaseActions } from '../BaseActions';
+import BaseActions from '../BaseActions';
 import { BaseStoreType } from '../../store/BaseStore';
 import { SearchParamsStoreType } from '../../store/SearchParamsStore';
 import { BaseApiType } from '../../api/BaseApi';
@@ -28,7 +28,7 @@ describe('Todo actions', () => {
         }),
       };
 
-      const actions = createBaseActions(
+      const actions = new BaseActions(
         (mockedStore as unknown) as BaseStoreType,
         ({} as unknown) as SearchParamsStoreType,
         (mockedApi as unknown) as BaseApiType,

@@ -3,7 +3,7 @@ import TodoPage from './pages/todos/views/Page';
 import { ToastContainer } from 'react-toastify';
 import { createBaseStore } from 'core/store/BaseStore';
 import { createSearchParamsStore } from 'core/store/SearchParamsStore';
-import { createBaseActions } from 'core/actions/BaseActions';
+import BaseActions from 'core/actions/BaseActions';
 import { IActionsContextValue, IStoresContextValue, StoresContext, ActionsContext } from './contexts';
 import { createTodoAPI } from './pages/todos/api';
 
@@ -13,7 +13,7 @@ export const stores: IStoresContextValue = {
 };
 
 export const actions: IActionsContextValue = {
-  todoActions: createBaseActions(stores.todoStore, stores.todoSearchParamsStore, createTodoAPI()),
+  todoActions: new BaseActions(stores.todoStore, stores.todoSearchParamsStore, createTodoAPI()),
 };
 
 const App = () => {
