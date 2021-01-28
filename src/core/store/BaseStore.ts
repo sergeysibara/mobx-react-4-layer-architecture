@@ -1,6 +1,6 @@
 import { observable, action, makeObservable } from 'mobx';
 import { IEditState, IListState } from './types';
-import IIdentifiable from 'core/types/IIdentifiable';
+import IIdentifiable from '../types/IIdentifiable';
 
 /**
  * Base class for stores.
@@ -19,7 +19,7 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
   }
 
   get list(): TListItem[] {
-    return this.listState.results;
+    return Array.isArray(this.listState.results) ? this.listState.results : [];
   }
 
   get editModel(): TEditModel | undefined {
@@ -64,7 +64,3 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
 }
 
 export type BaseStoreType = BaseStore<IIdentifiable, IIdentifiable>;
-
-// for using in app and in tests
-export const createBaseStore = <TListItem extends IIdentifiable, TEditModel extends IIdentifiable>() =>
-  new BaseStore<TListItem, TEditModel>();
