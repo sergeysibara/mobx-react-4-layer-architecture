@@ -6,10 +6,9 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import TodoList from '../List';
-import BaseStore from 'core/store/BaseStore';
+import BaseListStore from 'core/store/BaseListStore';
 import { StoresContext, ActionsContext } from 'contexts';
 import { ITodoModel } from '../../stores';
-import { createSearchParamsStore } from 'core/store/SearchParamsStore';
 
 const TEST_LI_TEXT = 'testTodoItem1';
 const mockListData = {
@@ -23,12 +22,11 @@ const mockListData = {
 describe('<TodoList />', () => {
   describe('TodoList', () => {
     test('should render item with a test text', () => {
-      const todoStore = new BaseStore<ITodoModel, ITodoModel>();
+      const todoStore = new BaseListStore<ITodoModel>();
       todoStore.setListState(mockListData);
 
       const stores = {
-        todoStore: todoStore,
-        todoSearchParamsStore: createSearchParamsStore(),
+        todoListStore: todoStore,
       };
 
       const mockedActions = {

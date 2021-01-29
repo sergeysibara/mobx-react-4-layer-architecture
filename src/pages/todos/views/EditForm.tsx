@@ -6,10 +6,10 @@ import { IActionsContextValue, IStoresContextValue, ActionsContext, StoresContex
 import { ITodoModel } from '../stores';
 
 const TodoForm = observer(() => {
-  const { todoStore } = useContext(StoresContext) as IStoresContextValue;
+  const { todoEditStore } = useContext(StoresContext) as IStoresContextValue;
   const { todoActions } = useContext(ActionsContext) as IActionsContextValue;
 
-  const todoModel = todoStore?.editModel;
+  const todoModel = todoEditStore?.editModel;
   const isNew = !todoModel;
 
   const [todoText, setTodoText, todoTextBind] = useInputBind(todoModel ? todoModel.title : '');

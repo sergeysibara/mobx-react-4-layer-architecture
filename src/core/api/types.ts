@@ -1,5 +1,4 @@
-import IIdentifiable from 'core/types/IIdentifiable';
-import ObjectType from '../types/ObjectType';
+import { ObjectType, IIdentifiable } from '../types';
 
 export interface ResponseModel<T extends IIdentifiable> {
   model: T;

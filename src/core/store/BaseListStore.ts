@@ -1,29 +1,28 @@
 import { observable, action, makeObservable } from 'mobx';
-import { IEditState, IListState } from './types';
-import IIdentifiable from '../types/IIdentifiable';
+import { IIdentifiable, ErrorType } from '../types';
+
+export interface IListState<TListItem extends IIdentifiable> {
+  results: TListItem[];
+  count?: number; // number of all items on server
+  isLoading?: boolean;
+  error?: ErrorType;
+}
 
 /**
  * Base class for stores.
  */
-export default class BaseStore<TListItem extends IIdentifiable, TEditModel extends IIdentifiable> {
+export default class BaseListStore<TListItem extends IIdentifiable> {
   @observable
   protected listState: IListState<TListItem> = {
     results: [],
   };
 
-  @observable
-  protected editState: IEditState<TEditModel> = {};
-
   constructor() {
-    makeObservable<BaseStore<TListItem, TEditModel>>(this);
+    makeObservable<BaseListStore<TListItem>>(this);
   }
 
   get list(): TListItem[] {
     return Array.isArray(this.listState.results) ? this.listState.results : [];
-  }
-
-  get editModel(): TEditModel | undefined {
-    return this.editState.model;
   }
 
   @action
@@ -34,16 +33,6 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
   @action
   addToList(item: TListItem) {
     this.list.push(item);
-  }
-
-  @action
-  setEditState(editState: IEditState<TEditModel>) {
-    this.editState = editState;
-  }
-
-  @action
-  clearEditState() {
-    this.editState = {};
   }
 
   @action
@@ -63,4 +52,4 @@ export default class BaseStore<TListItem extends IIdentifiable, TEditModel exten
   }
 }
 
-export type BaseStoreType = BaseStore<IIdentifiable, IIdentifiable>;
+export type BaseListStoreType = BaseListStore<IIdentifiable>;

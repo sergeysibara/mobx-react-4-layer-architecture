@@ -3,10 +3,11 @@
  */
 
 import BaseActions from '../BaseActions';
-import { BaseStoreType } from '../../store/BaseStore';
+import { BaseListStoreType } from '../../store/BaseListStore';
+import { BaseEditStoreType } from '../../store/BaseEditStore';
 import { SearchParamsStoreType } from '../../store/SearchParamsStore';
 import { BaseApiType } from '../../api/BaseApi';
-import IIdentifiable from '../../types/IIdentifiable';
+import { IIdentifiable } from '../../types';
 
 describe('Todo actions', () => {
   describe('Update', () => {
@@ -29,7 +30,8 @@ describe('Todo actions', () => {
       };
 
       const actions = new BaseActions(
-        (mockedStore as unknown) as BaseStoreType,
+        (mockedStore as unknown) as BaseListStoreType,
+        ({} as unknown) as BaseEditStoreType,
         ({} as unknown) as SearchParamsStoreType,
         (mockedApi as unknown) as BaseApiType,
       );

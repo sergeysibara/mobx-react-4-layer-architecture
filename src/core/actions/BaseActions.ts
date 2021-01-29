@@ -1,8 +1,8 @@
-import { BaseStoreType } from '../store/BaseStore';
+import { BaseListStoreType } from '../store/BaseListStore';
+import { BaseEditStoreType } from '../store/BaseEditStore';
 import { SearchParamsStoreType } from '../store/SearchParamsStore';
 import { BaseApiType } from '../api/BaseApi';
-import IIdentifiable from '../types/IIdentifiable';
-import ObjectType from '../types/ObjectType';
+import { IIdentifiable, ObjectType } from '../types';
 import { isIResponseError } from '../api/types';
 import { toast } from 'react-toastify';
 
@@ -11,12 +11,17 @@ import { toast } from 'react-toastify';
  * Actions - it is side effects in this example. Used for call api, update stores, other business logic.
  */
 export default class BaseActions {
-  private readonly _mainStore: BaseStoreType;
+  private readonly _listStore: BaseListStoreType;
+  private readonly _editStore: BaseEditStoreType;
   private readonly _searchParamsStore: SearchParamsStoreType;
   private readonly _api: BaseApiType;
 
-  get mainStore(): BaseStoreType {
-    return this._mainStore;
+  get listStore(): BaseListStoreType {
+    return this._listStore;
+  }
+
+  get editStore(): BaseEditStoreType {
+    return this._editStore;
   }
 
   get searchParamsStore(): SearchParamsStoreType {
@@ -27,19 +32,25 @@ export default class BaseActions {
     return this._api;
   }
 
-  constructor(mainStore: BaseStoreType, searchParamsStore: SearchParamsStoreType, api: BaseApiType) {
-    this._mainStore = mainStore;
+  constructor(
+    listStore: BaseListStoreType,
+    editStore: BaseEditStoreType,
+    searchParamsStore: SearchParamsStoreType,
+    api: BaseApiType,
+  ) {
+    this._listStore = listStore;
+    this._editStore = editStore;
     this._searchParamsStore = searchParamsStore;
     this._api = api;
   }
 
   getOne = async (id: number) => {
-    this.mainStore.clearEditState();
+    this.editStore.clearEditState();
     const response = await this.api.getOne(id);
     if (isIResponseError(response)) {
       toast.error(response.message);
     } else {
-      this.mainStore.setEditState({ model: response.model });
+      this.editStore.setEditState({ model: response.model });
     }
   };
 
@@ -49,7 +60,7 @@ export default class BaseActions {
     if (isIResponseError(response)) {
       toast.error(response.message);
     } else {
-      this.mainStore.setListState({
+      this.listStore.setListState({
         results: response.results,
         count: response.count,
       });
@@ -62,7 +73,7 @@ export default class BaseActions {
       toast.error(response.message);
     } else {
       // await this.getList(); // for apply filters
-      this.mainStore.addToList(response.model);
+      this.listStore.addToList(response.model);
     }
   };
 
@@ -71,13 +82,13 @@ export default class BaseActions {
     if (isIResponseError(response)) {
       toast.error(response.message);
     } else {
-      this.mainStore.updateListItem(response.model);
       // await this.getList(); // for apply filters
+      this.listStore.updateListItem(response.model);
     }
   };
 
   clearEditState = () => {
-    this.mainStore.clearEditState();
+    this.editStore.clearEditState();
   };
 
   delete = async (id: number) => {
@@ -85,7 +96,8 @@ export default class BaseActions {
     if (isIResponseError(response)) {
       toast.error(response.message);
     } else {
-      this.mainStore.deleteFromList(id);
+      this.listStore.deleteFromList(id);
+      this.clearEditState();
     }
   };
 

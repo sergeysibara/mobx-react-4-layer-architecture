@@ -12,7 +12,7 @@ import { IActionsContextValue, IStoresContextValue, ActionsContext, StoresContex
 import { ITodoModel } from '../stores';
 
 const TodoList = observer(() => {
-  const { todoStore } = useContext(StoresContext) as IStoresContextValue;
+  const { todoListStore } = useContext(StoresContext) as IStoresContextValue;
   const { todoActions } = useContext(ActionsContext) as IActionsContextValue;
 
   const handleChange = (item) => {
@@ -22,9 +22,10 @@ const TodoList = observer(() => {
   useEffect(() => {
     todoActions.getList();
   }, []);
+
   return (
     <List>
-      {todoStore.list.map((item) => (
+      {todoListStore.list.map((item) => (
         <ListItem key={item.id} dense button>
           <Checkbox
             tabIndex={-1}

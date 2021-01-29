@@ -1,5 +1,5 @@
 import { observable, action, makeObservable, toJS } from 'mobx';
-import ObjectType from '../types/ObjectType';
+import { ObjectType } from '../types';
 
 // Format description - https://github.com/typicode/json-server#filter
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -7,9 +7,9 @@ export interface IFiltersState extends Record<string, unknown> {}
 
 // Format description - https://github.com/typicode/json-server#paginate
 export type PagingStateType = {
-  _start?: number; // offset
-  _page?: number; // pageNumber
-  _limit?: number; // pageSize
+  _start?: number; // offset from first element in server search results
+  _page?: number; // page number
+  _limit?: number; // page size
 };
 
 // Format description - https://github.com/typicode/json-server#sort
@@ -70,6 +70,3 @@ export default class SearchParamsStore<T extends IFiltersState> {
 }
 
 export type SearchParamsStoreType = SearchParamsStore<IFiltersState>;
-
-// for using in app and in tests
-export const createSearchParamsStore = <T extends IFiltersState>() => new SearchParamsStore<T>();

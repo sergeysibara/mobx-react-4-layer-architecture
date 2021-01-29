@@ -1,10 +1,11 @@
 import { createContext } from 'react';
 import BaseActions from './core/actions/BaseActions';
 
-import { TodoSearchParamsStoreType, TodoStoreType } from './pages/todos/stores';
+import { TodoListStoreType, TodoEditStoreType, TodoSearchParamsStoreType } from './pages/todos/stores';
 
 export interface IStoresContextValue {
-  todoStore: TodoStoreType;
+  todoListStore: TodoListStoreType;
+  todoEditStore: TodoEditStoreType;
   todoSearchParamsStore: TodoSearchParamsStoreType;
 }
 

@@ -1,7 +1,6 @@
 import apiService from './apiService';
 import { ResponseList, ResponseModel, DeleteResponse, IResponseError } from './types';
-import IIdentifiable from 'core/types/IIdentifiable';
-import ObjectType from 'core/types/ObjectType';
+import { IIdentifiable, ObjectType } from '../types';
 
 export default class BaseApi<T extends IIdentifiable> {
   private readonly _apiUrl: string;
