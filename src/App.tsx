@@ -1,15 +1,15 @@
 import React from 'react';
 import TodoPage from './pages/todos/views/Page';
 import { ToastContainer } from 'react-toastify';
-import BaseListStore from 'core/store/BaseListStore';
-import BaseEditStore from 'core/store/BaseEditStore';
-import SearchParamsStore from 'core/store/SearchParamsStore';
-import BaseActions from 'core/actions/BaseActions';
+import BaseListStore from 'core/stores/BaseListStore';
+import BaseEditStore from 'core/stores/BaseEditStore';
+import SearchParamsStore from 'core/stores/SearchParamsStore';
+import BaseController from 'core/controllers/BaseController';
 import {
   IStoresContextValue,
-  IActionsContextValue,
+  IControllersContextValue,
   StoresContext,
-  ActionsContext,
+  ControllersContext,
 } from './contexts';
 import { createTodoAPI } from './pages/todos/api';
 
@@ -19,8 +19,8 @@ export const stores: IStoresContextValue = {
   todoSearchParamsStore: new SearchParamsStore(),
 };
 
-export const actions: IActionsContextValue = {
-  todoActions: new BaseActions(
+export const controllers: IControllersContextValue = {
+  todoController: new BaseController(
     stores.todoListStore,
     stores.todoEditStore,
     stores.todoSearchParamsStore,
@@ -32,9 +32,9 @@ const App = () => {
   return (
     <div className="App">
       <StoresContext.Provider value={stores}>
-        <ActionsContext.Provider value={actions}>
+        <ControllersContext.Provider value={controllers}>
           <TodoPage />
-        </ActionsContext.Provider>
+        </ControllersContext.Provider>
       </StoresContext.Provider>
       <ToastContainer />
     </div>

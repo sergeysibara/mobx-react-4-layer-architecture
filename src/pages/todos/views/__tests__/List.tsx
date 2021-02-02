@@ -6,12 +6,12 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import TodoList from '../List';
-import BaseListStore from 'core/store/BaseListStore';
+import BaseListStore from 'core/stores/BaseListStore';
 import {
   StoresContext,
-  ActionsContext,
+  ControllersContext,
   IStoresContextValue,
-  IActionsContextValue,
+  IControllersContextValue,
 } from 'contexts';
 import { ITodoModel } from '../../stores';
 
@@ -34,23 +34,23 @@ describe('<TodoList />', () => {
         todoListStore: todoStore,
       } as IStoresContextValue;
 
-      const mockedActions = {
+      const mockedController = {
         getList: jest.fn(async () => {}),
       };
 
-      const actions = ({
-        todoActions: mockedActions,
-      } as unknown) as IActionsContextValue;
+      const controllers = ({
+        todoController: mockedController,
+      } as unknown) as IControllersContextValue;
 
       render(
         <StoresContext.Provider value={stores}>
-          <ActionsContext.Provider value={actions}>
+          <ControllersContext.Provider value={controllers}>
             <TodoList />
-          </ActionsContext.Provider>
+          </ControllersContext.Provider>
         </StoresContext.Provider>,
       );
 
-      expect(mockedActions.getList.mock.calls.length).toBe(1);
+      expect(mockedController.getList.mock.calls.length).toBe(1);
       expect(screen.getByText(TEST_LI_TEXT)).toBeInTheDocument();
     });
   });

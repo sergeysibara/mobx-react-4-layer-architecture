@@ -1,5 +1,5 @@
 import { createContext, Context } from 'react';
-import BaseActions from './core/actions/BaseActions';
+import BaseController from './core/controllers/BaseController';
 
 import {
   TodoListStoreType,
@@ -13,13 +13,15 @@ export interface IStoresContextValue {
   todoSearchParamsStore: TodoSearchParamsStoreType;
 }
 
-export interface IActionsContextValue {
-  todoActions: BaseActions;
+export interface IControllersContextValue {
+  todoController: BaseController;
 }
 
-export const StoresContext = createContext<IStoresContextValue | null>(
+const StoresContext = createContext<IStoresContextValue | null>(
   null,
 ) as Context<IStoresContextValue>;
-export const ActionsContext = createContext<IActionsContextValue | null>(
+const ControllersContext = createContext<IControllersContextValue | null>(
   null,
-) as Context<IActionsContextValue>;
+) as Context<IControllersContextValue>;
+
+export { StoresContext, ControllersContext };

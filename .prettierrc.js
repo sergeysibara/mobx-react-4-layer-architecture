@@ -5,7 +5,7 @@ module.exports = {
   printWidth: 80, // It used for Reformat in Prettier command,
                   // not for output errors in linter.
   tabWidth: 2,
-  proseWrap: 'never',
+  proseWrap: 'always',
   endOfLine: 'lf',
   useTabs: false,
   overrides: [

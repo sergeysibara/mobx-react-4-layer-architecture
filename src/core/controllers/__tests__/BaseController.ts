@@ -1,15 +1,15 @@
 /**
- * Demonstration that actions can be tested
+ * Demonstration that controllers can be tested
  */
 
-import BaseActions from '../BaseActions';
-import { BaseListStoreType } from '../../store/BaseListStore';
-import { BaseEditStoreType } from '../../store/BaseEditStore';
-import { SearchParamsStoreType } from '../../store/SearchParamsStore';
+import BaseController from '../BaseController';
+import { BaseListStoreType } from '../../stores/BaseListStore';
+import { BaseEditStoreType } from '../../stores/BaseEditStore';
+import { SearchParamsStoreType } from '../../stores/SearchParamsStore';
 import { BaseApiType } from '../../api/BaseApi';
 import { IIdentifiable } from '../../types';
 
-describe('Todo actions', () => {
+describe('Todo controllers', () => {
   describe('Update', () => {
     test('should update item in store', async () => {
       expect.assertions(3);
@@ -29,14 +29,14 @@ describe('Todo actions', () => {
         }),
       };
 
-      const actions = new BaseActions(
+      const controllers = new BaseController(
         (mockedStore as unknown) as BaseListStoreType,
         ({} as unknown) as BaseEditStoreType,
         ({} as unknown) as SearchParamsStoreType,
         (mockedApi as unknown) as BaseApiType,
       );
 
-      await actions.update(testItem);
+      await controllers.update(testItem);
       expect(mockedApi.update.mock.calls.length).toBe(1);
       expect(mockedStore.updateListItem.mock.calls.length).toBe(1);
     });

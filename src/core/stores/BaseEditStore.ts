@@ -1,4 +1,4 @@
-import { observable, action, makeObservable } from 'mobx';
+import { observable, action, computed, makeObservable } from 'mobx';
 import { IIdentifiable, ErrorType } from '../types';
 
 export interface IEditState<TEditModel extends IIdentifiable> {
@@ -18,6 +18,7 @@ export default class BaseEditStore<TEditModel extends IIdentifiable> {
     makeObservable<BaseEditStore<TEditModel>>(this);
   }
 
+  @computed
   get editModel(): TEditModel | undefined {
     return this.editState.model;
   }

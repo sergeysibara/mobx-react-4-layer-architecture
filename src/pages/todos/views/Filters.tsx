@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Button from '@material-ui/core/Button';
 import { observer } from 'mobx-react-lite';
 import Typography from '@material-ui/core/Typography';
-import { ActionsContext, StoresContext } from 'contexts';
+import { ControllersContext, StoresContext } from 'contexts';
 import { makeStyles } from '@material-ui/core/styles';
 
 type MouseEventHandlerType = (
@@ -22,7 +22,7 @@ const FilterButton = observer<{
   onClick: MouseEventHandlerType; //or Function;
 }>(({ children, completed, onClick, ...props }) => {
   const { todoSearchParamsStore } = useContext(StoresContext);
-  const { todoActions } = useContext(ActionsContext);
+  const { todoController } = useContext(ControllersContext);
 
   const classes = useStyles();
 
@@ -33,7 +33,7 @@ const FilterButton = observer<{
       classes={classes}
       disabled={visibilityFilter === completed}
       onClick={(e) => {
-        todoActions.setFilters({ completed });
+        todoController.setFilters({ completed });
         if (onClick) {
           onClick(e, completed ? completed.toString() : '');
         }

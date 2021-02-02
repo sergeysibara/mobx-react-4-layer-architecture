@@ -1,17 +1,16 @@
-import { BaseListStoreType } from '../store/BaseListStore';
-import { BaseEditStoreType } from '../store/BaseEditStore';
-import { SearchParamsStoreType } from '../store/SearchParamsStore';
+import { BaseListStoreType } from '../stores/BaseListStore';
+import { BaseEditStoreType } from '../stores/BaseEditStore';
+import { SearchParamsStoreType } from '../stores/SearchParamsStore';
 import { BaseApiType } from '../api/BaseApi';
 import { IIdentifiable, ObjectType } from '../types';
 import { isIResponseError } from '../api/types';
 import { toast } from 'react-toastify';
 
 /**
- * Base class for action group.
- * Actions - it is side effects in this example.
- * Used for call api, update stores, other business logic.
+ * Base class for controller controllers.
+ * Used for call services (like api), update stores.
  */
-export default class BaseActions {
+export default class BaseController {
   private readonly _listStore: BaseListStoreType;
   private readonly _editStore: BaseEditStoreType;
   private readonly _searchParamsStore: SearchParamsStoreType;

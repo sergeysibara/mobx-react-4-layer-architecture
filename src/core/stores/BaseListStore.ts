@@ -1,4 +1,4 @@
-import { observable, action, makeObservable } from 'mobx';
+import { observable, action, makeObservable, computed } from 'mobx';
 import { IIdentifiable, ErrorType } from '../types';
 
 export interface IListState<TListItem extends IIdentifiable> {
@@ -21,6 +21,7 @@ export default class BaseListStore<TListItem extends IIdentifiable> {
     makeObservable<BaseListStore<TListItem>>(this);
   }
 
+  @computed
   get list(): TListItem[] {
     return Array.isArray(this.listState.results) ? this.listState.results : [];
   }

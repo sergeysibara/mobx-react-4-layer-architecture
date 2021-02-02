@@ -1,7 +1,9 @@
 import { IIdentifiable } from 'core/types';
-import BaseListStore from 'core/store/BaseListStore';
-import BaseEditStore from 'core/store/BaseEditStore';
-import SearchParamsStore, { IFiltersState } from 'core/store/SearchParamsStore';
+import BaseListStore from 'core/stores/BaseListStore';
+import BaseEditStore from 'core/stores/BaseEditStore';
+import SearchParamsStore, {
+  IFiltersState,
+} from 'core/stores/SearchParamsStore';
 
 export interface ITodoModel extends IIdentifiable {
   title: string;
