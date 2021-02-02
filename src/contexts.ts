@@ -1,7 +1,11 @@
-import { createContext } from 'react';
+import { createContext, Context } from 'react';
 import BaseActions from './core/actions/BaseActions';
 
-import { TodoListStoreType, TodoEditStoreType, TodoSearchParamsStoreType } from './pages/todos/stores';
+import {
+  TodoListStoreType,
+  TodoEditStoreType,
+  TodoSearchParamsStoreType,
+} from './pages/todos/stores';
 
 export interface IStoresContextValue {
   todoListStore: TodoListStoreType;
@@ -13,5 +17,9 @@ export interface IActionsContextValue {
   todoActions: BaseActions;
 }
 
-export const StoresContext = createContext<IStoresContextValue | unknown>(undefined);
-export const ActionsContext = createContext<IActionsContextValue | unknown>(undefined);
+export const StoresContext = createContext<IStoresContextValue | null>(
+  null,
+) as Context<IStoresContextValue>;
+export const ActionsContext = createContext<IActionsContextValue | null>(
+  null,
+) as Context<IActionsContextValue>;

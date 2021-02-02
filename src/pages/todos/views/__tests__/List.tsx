@@ -7,7 +7,12 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import TodoList from '../List';
 import BaseListStore from 'core/store/BaseListStore';
-import { StoresContext, ActionsContext } from 'contexts';
+import {
+  StoresContext,
+  ActionsContext,
+  IStoresContextValue,
+  IActionsContextValue,
+} from 'contexts';
 import { ITodoModel } from '../../stores';
 
 const TEST_LI_TEXT = 'testTodoItem1';
@@ -27,15 +32,15 @@ describe('<TodoList />', () => {
 
       const stores = {
         todoListStore: todoStore,
-      };
+      } as IStoresContextValue;
 
       const mockedActions = {
         getList: jest.fn(async () => {}),
       };
 
-      const actions = {
+      const actions = ({
         todoActions: mockedActions,
-      };
+      } as unknown) as IActionsContextValue;
 
       render(
         <StoresContext.Provider value={stores}>

@@ -36,7 +36,11 @@ export default class SearchParamsStore<T extends IFiltersState> {
     _order: 'asc',
   };
 
-  constructor(filters?: T, paging?: PagingStateType, sorting?: SortingStateType) {
+  constructor(
+    filters?: T,
+    paging?: PagingStateType,
+    sorting?: SortingStateType,
+  ) {
     makeObservable(this);
     if (filters) {
       this.filtersState = filters;
@@ -56,7 +60,11 @@ export default class SearchParamsStore<T extends IFiltersState> {
   }
 
   getSearchParamsMergedToJS(): ObjectType {
-    return { ...toJS(this.filtersState), ...toJS(this.pagingState), ...toJS(this.sortingState) };
+    return {
+      ...toJS(this.filtersState),
+      ...toJS(this.pagingState),
+      ...toJS(this.sortingState),
+    };
   }
 
   @action

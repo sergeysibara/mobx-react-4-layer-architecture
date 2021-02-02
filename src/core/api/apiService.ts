@@ -11,15 +11,26 @@ const apiService = {
     return axios.get(url, config);
   },
 
-  post: (url: string, data: ObjectType, config?: AxiosRequestConfig): ApiServiceResponseType => {
+  post: (
+    url: string,
+    data: ObjectType,
+    config?: AxiosRequestConfig,
+  ): ApiServiceResponseType => {
     return axios.post(url, data, config);
   },
 
-  patch: (url: string, data: ObjectType, config?: AxiosRequestConfig): ApiServiceResponseType => {
+  patch: (
+    url: string,
+    data: ObjectType,
+    config?: AxiosRequestConfig,
+  ): ApiServiceResponseType => {
     return axios.patch(url, data, config);
   },
 
-  delete: (url: string, config?: AxiosRequestConfig): ApiServiceResponseType => {
+  delete: (
+    url: string,
+    config?: AxiosRequestConfig,
+  ): ApiServiceResponseType => {
     return axios.delete(url, config);
   },
 };

@@ -8,15 +8,18 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { observer } from 'mobx-react-lite';
-import { IActionsContextValue, IStoresContextValue, ActionsContext, StoresContext } from 'contexts';
+import { ActionsContext, StoresContext } from 'contexts';
 import { ITodoModel } from '../stores';
 
 const TodoList = observer(() => {
-  const { todoListStore } = useContext(StoresContext) as IStoresContextValue;
-  const { todoActions } = useContext(ActionsContext) as IActionsContextValue;
+  const { todoListStore } = useContext(StoresContext);
+  const { todoActions } = useContext(ActionsContext);
 
   const handleChange = (item) => {
-    todoActions.update({ id: item.id, completed: !item.completed } as ITodoModel);
+    todoActions.update({
+      id: item.id,
+      completed: !item.completed,
+    } as ITodoModel);
   };
 
   useEffect(() => {

@@ -8,7 +8,8 @@ import { toast } from 'react-toastify';
 
 /**
  * Base class for action group.
- * Actions - it is side effects in this example. Used for call api, update stores, other business logic.
+ * Actions - it is side effects in this example.
+ * Used for call api, update stores, other business logic.
  */
 export default class BaseActions {
   private readonly _listStore: BaseListStoreType;

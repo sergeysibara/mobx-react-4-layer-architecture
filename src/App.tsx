@@ -5,7 +5,12 @@ import BaseListStore from 'core/store/BaseListStore';
 import BaseEditStore from 'core/store/BaseEditStore';
 import SearchParamsStore from 'core/store/SearchParamsStore';
 import BaseActions from 'core/actions/BaseActions';
-import { IActionsContextValue, IStoresContextValue, StoresContext, ActionsContext } from './contexts';
+import {
+  IStoresContextValue,
+  IActionsContextValue,
+  StoresContext,
+  ActionsContext,
+} from './contexts';
 import { createTodoAPI } from './pages/todos/api';
 
 export const stores: IStoresContextValue = {

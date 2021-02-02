@@ -2,10 +2,13 @@ import React, { useContext } from 'react';
 import Button from '@material-ui/core/Button';
 import { observer } from 'mobx-react-lite';
 import Typography from '@material-ui/core/Typography';
-import { IActionsContextValue, IStoresContextValue, ActionsContext, StoresContext } from 'contexts';
+import { ActionsContext, StoresContext } from 'contexts';
 import { makeStyles } from '@material-ui/core/styles';
 
-type MouseEventHandlerType = (e: React.MouseEvent, additionalParam: string) => void;
+type MouseEventHandlerType = (
+  e: React.MouseEvent,
+  additionalParam: string,
+) => void;
 
 const useStyles = makeStyles({
   root: {
@@ -18,8 +21,8 @@ const FilterButton = observer<{
   completed?: boolean;
   onClick: MouseEventHandlerType; //or Function;
 }>(({ children, completed, onClick, ...props }) => {
-  const { todoSearchParamsStore } = useContext(StoresContext) as IStoresContextValue;
-  const { todoActions } = useContext(ActionsContext) as IActionsContextValue;
+  const { todoSearchParamsStore } = useContext(StoresContext);
+  const { todoActions } = useContext(ActionsContext);
 
   const classes = useStyles();
 
@@ -49,9 +52,11 @@ const Filters = ({ onChange }: { onChange: MouseEventHandlerType }) => {
         {'A fake server is used - https://jsonplaceholder.typicode.com.'}
       </Typography>
       <Typography variant="h6" color="secondary">
+        {/* eslint-disable-next-line */}
         {"Changes are faked and aren't persisted! A changes will not work correctly with the fake server."}
       </Typography>
       <Typography variant="h6" color="secondary">
+        {/* eslint-disable-next-line */}
         {'Changes will be discarded after changing the filter bellow and after repeated updates an item!'}
       </Typography>
       <FilterButton onClick={onChange}>All</FilterButton>

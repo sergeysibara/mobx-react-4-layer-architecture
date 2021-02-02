@@ -1,5 +1,10 @@
 import apiService from './apiService';
-import { ResponseList, ResponseModel, DeleteResponse, IResponseError } from './types';
+import {
+  IResponseList,
+  IResponseModel,
+  IDeleteResponse,
+  IResponseError,
+} from './types';
 import { IIdentifiable, ObjectType } from '../types';
 
 export default class BaseApi<T extends IIdentifiable> {
@@ -13,7 +18,10 @@ export default class BaseApi<T extends IIdentifiable> {
     this._apiUrl = apiUrl;
   }
 
-  getOne = async (id: number, params?: ObjectType): Promise<ResponseModel<T> | IResponseError> => {
+  getOne = async (
+    id: number,
+    params?: ObjectType,
+  ): Promise<IResponseModel<T> | IResponseError> => {
     try {
       const ret = await apiService.get(`${this._apiUrl}/${id}`, { params });
       return { model: ret.data };
@@ -22,7 +30,9 @@ export default class BaseApi<T extends IIdentifiable> {
     }
   };
 
-  getList = async (params?: ObjectType): Promise<ResponseList<T> | IResponseError> => {
+  getList = async (
+    params?: ObjectType,
+  ): Promise<IResponseList<T> | IResponseError> => {
     try {
       const ret = await apiService.get(this._apiUrl, { params });
       return { results: ret.data || [] };
@@ -31,7 +41,10 @@ export default class BaseApi<T extends IIdentifiable> {
     }
   };
 
-  create = async (modelData: ObjectType, params?: ObjectType): Promise<ResponseModel<T> | IResponseError> => {
+  create = async (
+    modelData: ObjectType,
+    params?: ObjectType,
+  ): Promise<IResponseModel<T> | IResponseError> => {
     try {
       const ret = await apiService.post(this._apiUrl, modelData, { params });
       return { model: ret.data };
@@ -40,16 +53,26 @@ export default class BaseApi<T extends IIdentifiable> {
     }
   };
 
-  update = async (modelData: { id: number }, params?: ObjectType): Promise<ResponseModel<T> | IResponseError> => {
+  update = async (
+    modelData: { id: number },
+    params?: ObjectType,
+  ): Promise<IResponseModel<T> | IResponseError> => {
     try {
-      const ret = await apiService.patch(`${this._apiUrl}/${modelData.id}`, modelData, { params });
+      const ret = await apiService.patch(
+        `${this._apiUrl}/${modelData.id}`,
+        modelData,
+        { params },
+      );
       return { model: ret.data };
     } catch (error) {
       return this.handleError(error);
     }
   };
 
-  delete = async (id: number, params?: ObjectType): Promise<DeleteResponse | IResponseError> => {
+  delete = async (
+    id: number,
+    params?: ObjectType,
+  ): Promise<IDeleteResponse | IResponseError> => {
     try {
       const ret = await apiService.delete(`${this._apiUrl}/${id}`, { params });
       return { id: ret.data };

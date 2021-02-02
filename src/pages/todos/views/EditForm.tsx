@@ -2,17 +2,19 @@ import React, { useContext, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import useInputBind from 'components/controls/useInputBind';
 import { observer } from 'mobx-react-lite';
-import { IActionsContextValue, IStoresContextValue, ActionsContext, StoresContext } from 'contexts';
+import { ActionsContext, StoresContext } from 'contexts';
 import { ITodoModel } from '../stores';
 
 const TodoForm = observer(() => {
-  const { todoEditStore } = useContext(StoresContext) as IStoresContextValue;
-  const { todoActions } = useContext(ActionsContext) as IActionsContextValue;
+  const { todoEditStore } = useContext(StoresContext);
+  const { todoActions } = useContext(ActionsContext);
 
   const todoModel = todoEditStore?.editModel;
   const isNew = !todoModel;
 
-  const [todoText, setTodoText, todoTextBind] = useInputBind(todoModel ? todoModel.title : '');
+  const [todoText, setTodoText, todoTextBind] = useInputBind(
+    todoModel ? todoModel.title : '',
+  );
 
   useEffect(() => {
     if (todoModel) {

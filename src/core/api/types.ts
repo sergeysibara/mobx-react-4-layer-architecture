@@ -1,15 +1,15 @@
 import { ObjectType, IIdentifiable } from '../types';
 
-export interface ResponseModel<T extends IIdentifiable> {
+export interface IResponseModel<T extends IIdentifiable> {
   model: T;
 }
 
-export interface ResponseList<T extends IIdentifiable> {
+export interface IResponseList<T extends IIdentifiable> {
   results: T[];
   count?: number;
 }
 
-export interface DeleteResponse {
+export interface IDeleteResponse {
   id?: number;
 }
 
