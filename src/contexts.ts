@@ -6,6 +6,10 @@ import {
   TodoEditStoreType,
   TodoSearchParamsStoreType,
 } from './pages/todos/stores';
+import BaseListStore from './core/stores/BaseListStore';
+import BaseEditStore from './core/stores/BaseEditStore';
+import SearchParamsStore from './core/stores/SearchParamsStore';
+import { createTodoAPI } from './pages/todos/api';
 
 export interface IStoresContextValue {
   todoListStore: TodoListStoreType;
@@ -25,3 +29,25 @@ const ControllersContext = createContext<IControllersContextValue | null>(
 ) as Context<IControllersContextValue>;
 
 export { StoresContext, ControllersContext };
+
+export function initContexts() {
+  const stores: IStoresContextValue = {
+    todoListStore: new BaseListStore(),
+    todoEditStore: new BaseEditStore(),
+    todoSearchParamsStore: new SearchParamsStore(),
+  };
+
+  const controllers: IControllersContextValue = {
+    todoController: new BaseController(
+      stores.todoListStore,
+      stores.todoEditStore,
+      stores.todoSearchParamsStore,
+      createTodoAPI('/todos'),
+    ),
+  };
+
+  return {
+    stores,
+    controllers,
+  };
+}

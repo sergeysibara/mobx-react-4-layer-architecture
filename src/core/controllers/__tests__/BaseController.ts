@@ -9,7 +9,7 @@ import { SearchParamsStoreType } from '../../stores/SearchParamsStore';
 import { BaseApiType } from '../../api/BaseApi';
 import { IIdentifiable } from '../../types';
 
-describe('Todo controllers', () => {
+describe('Base controller', () => {
   describe('Update', () => {
     test('should update item in store', async () => {
       expect.assertions(3);
