@@ -1,9 +1,12 @@
-import React from 'react';
 import TodoPage from './pages/todos/views/Page';
 import { ToastContainer } from 'react-toastify';
-import { initContexts, StoresContext, ControllersContext } from './contexts';
+import {
+  initContextsValues,
+  StoresContext,
+  ControllersContext,
+} from './contexts';
 
-const contexts = initContexts();
+const contexts = initContextsValues();
 
 const App = () => {
   return (

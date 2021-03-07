@@ -21,7 +21,8 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-empty-function": "off",
-    "max-len": ["error", { "code": 80 }]
+    "max-len": ["error", { "code": 80 }],
+    "react/react-in-jsx-scope": "off"
   },
   "settings": {
     "react": {

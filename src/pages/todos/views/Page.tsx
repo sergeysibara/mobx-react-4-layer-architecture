@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import EditForm from './EditForm';
 import List from './List';
 import Filters from './Filters';

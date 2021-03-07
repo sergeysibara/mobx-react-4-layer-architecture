@@ -30,7 +30,7 @@ const ControllersContext = createContext<IControllersContextValue | null>(
 
 export { StoresContext, ControllersContext };
 
-export function initContexts() {
+export function initContextsValues() {
   const stores: IStoresContextValue = {
     todoListStore: new BaseListStore(),
     todoEditStore: new BaseEditStore(),
