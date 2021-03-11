@@ -44,7 +44,7 @@ export default class BaseController {
     this._api = api;
   }
 
-  getOne = async (id: number) => {
+  async getOne(id: number) {
     this.editStore.clearEditState();
     const response = await this.api.getOne(id);
     if (isIResponseError(response)) {
@@ -52,9 +52,9 @@ export default class BaseController {
     } else {
       this.editStore.setEditState({ model: response.model });
     }
-  };
+  }
 
-  getList = async () => {
+  async getList() {
     const searchParams = this._searchParamsStore.getSearchParamsMergedToJS();
     const response = await this.api.getList(searchParams);
     if (isIResponseError(response)) {
@@ -65,9 +65,9 @@ export default class BaseController {
         count: response.count,
       });
     }
-  };
+  }
 
-  create = async (modelData: ObjectType) => {
+  async create(modelData: ObjectType) {
     const response = await this.api.create(modelData);
     if (isIResponseError(response)) {
       toast.error(response.message);
@@ -75,9 +75,9 @@ export default class BaseController {
       // await this.getList(); // for apply filters
       this.listStore.addToList(response.model);
     }
-  };
+  }
 
-  update = async (model: IIdentifiable) => {
+  async update(model: IIdentifiable) {
     const response = await this.api.update(model);
     if (isIResponseError(response)) {
       toast.error(response.message);
@@ -85,13 +85,13 @@ export default class BaseController {
       // await this.getList(); // for apply filters
       this.listStore.updateListItem(response.model);
     }
-  };
+  }
 
-  clearEditState = () => {
+  clearEditState() {
     this.editStore.clearEditState();
-  };
+  }
 
-  delete = async (id: number) => {
+  async delete(id: number) {
     const response = await this.api.delete(id);
     if (isIResponseError(response)) {
       toast.error(response.message);
@@ -99,9 +99,9 @@ export default class BaseController {
       this.listStore.deleteFromList(id);
       this.clearEditState();
     }
-  };
+  }
 
-  setFilters = (filters: ObjectType) => {
+  setFilters(filters: ObjectType) {
     this.searchParamsStore.setFilters(filters);
-  };
+  }
 }

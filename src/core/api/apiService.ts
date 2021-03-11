@@ -7,30 +7,33 @@ axios.defaults.baseURL = process.env.REACT_APP_BASE_API_URL;
 export type ApiServiceResponseType = Promise<AxiosResponse<any>>;
 
 const apiService = {
-  get: (url: string, config?: AxiosRequestConfig): ApiServiceResponseType => {
+  get: function (
+    url: string,
+    config?: AxiosRequestConfig,
+  ): ApiServiceResponseType {
     return axios.get(url, config);
   },
 
-  post: (
+  post: function (
     url: string,
     data: ObjectType,
     config?: AxiosRequestConfig,
-  ): ApiServiceResponseType => {
+  ): ApiServiceResponseType {
     return axios.post(url, data, config);
   },
 
-  patch: (
+  patch: function (
     url: string,
     data: ObjectType,
     config?: AxiosRequestConfig,
-  ): ApiServiceResponseType => {
+  ): ApiServiceResponseType {
     return axios.patch(url, data, config);
   },
 
-  delete: (
+  delete: function (
     url: string,
     config?: AxiosRequestConfig,
-  ): ApiServiceResponseType => {
+  ): ApiServiceResponseType {
     return axios.delete(url, config);
   },
 };

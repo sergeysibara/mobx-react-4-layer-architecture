@@ -13,7 +13,11 @@ export default function Page() {
     <>
       <Typography variant="h4">Todos Demo</Typography>
       <EditForm />
-      <Filters onChange={todoController.getList} />
+      <Filters
+        onChange={() => {
+          todoController.getList();
+        }}
+      />
       <List />
     </>
   );
