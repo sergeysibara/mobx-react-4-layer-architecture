@@ -7,14 +7,16 @@ import { isIResponseError } from '../api/types';
 import { toast } from 'react-toastify';
 
 /**
- * Base class for controller controllers.
+ * Base class for controllers.
  * Used for call services (like api), update stores.
  */
 export default class BaseController {
-  private readonly _listStore: BaseListStoreType;
-  private readonly _editStore: BaseEditStoreType;
-  private readonly _searchParamsStore: SearchParamsStoreType;
-  private readonly _api: BaseApiType;
+  constructor(
+    private readonly _listStore: BaseListStoreType,
+    private readonly _editStore: BaseEditStoreType,
+    private readonly _searchParamsStore: SearchParamsStoreType,
+    private readonly _api: BaseApiType,
+  ) {}
 
   get listStore(): BaseListStoreType {
     return this._listStore;
@@ -30,18 +32,6 @@ export default class BaseController {
 
   get api(): BaseApiType {
     return this._api;
-  }
-
-  constructor(
-    listStore: BaseListStoreType,
-    editStore: BaseEditStoreType,
-    searchParamsStore: SearchParamsStoreType,
-    api: BaseApiType,
-  ) {
-    this._listStore = listStore;
-    this._editStore = editStore;
-    this._searchParamsStore = searchParamsStore;
-    this._api = api;
   }
 
   async getOne(id: number) {
@@ -72,7 +62,7 @@ export default class BaseController {
     if (isIResponseError(response)) {
       toast.error(response.message);
     } else {
-      // await this.getList(); // for apply filters
+      // await this.getList(); // variant for applying filters
       this.listStore.addToList(response.model);
     }
   }
@@ -82,7 +72,7 @@ export default class BaseController {
     if (isIResponseError(response)) {
       toast.error(response.message);
     } else {
-      // await this.getList(); // for apply filters
+      // await this.getList(); // variant for applying filters
       this.listStore.updateListItem(response.model);
     }
   }

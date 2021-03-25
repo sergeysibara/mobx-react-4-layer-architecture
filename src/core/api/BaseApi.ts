@@ -8,14 +8,10 @@ import {
 import { IIdentifiable, ObjectType } from '../types';
 
 export default class BaseApi<T extends IIdentifiable> {
-  private readonly _apiUrl: string;
+  constructor(private readonly _apiUrl: string) {}
 
   get apiUrl(): string {
     return this._apiUrl;
-  }
-
-  constructor(apiUrl: string) {
-    this._apiUrl = apiUrl;
   }
 
   async getOne(

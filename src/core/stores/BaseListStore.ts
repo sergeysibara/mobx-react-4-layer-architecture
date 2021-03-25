@@ -8,9 +8,6 @@ export interface IListState<TListItem extends IIdentifiable> {
   error?: ErrorType;
 }
 
-/**
- * Base class for stores.
- */
 export default class BaseListStore<TListItem extends IIdentifiable> {
   @observable
   protected listState: IListState<TListItem> = {

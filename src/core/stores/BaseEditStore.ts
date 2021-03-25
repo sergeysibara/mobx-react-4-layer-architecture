@@ -7,9 +7,6 @@ export interface IEditState<TEditModel extends IIdentifiable> {
   error?: ErrorType;
 }
 
-/**
- * Base class for stores.
- */
 export default class BaseEditStore<TEditModel extends IIdentifiable> {
   @observable
   protected editState: IEditState<TEditModel> = {};

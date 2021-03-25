@@ -1,3 +1,3 @@
-// Contains overrided controller controllers for "todos" feature
+// Contains overrided controller for "todos" feature
 
 export {};
